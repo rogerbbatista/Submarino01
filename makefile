@@ -13,8 +13,8 @@ obj/Submarine.o: classes/Submarine.h classes/Submarine.cpp
 obj/GlobalConfig.o: classes/GlobalConfig.h classes/GlobalConfig.cpp
 	g++ -c classes/GlobalConfig.cpp -o obj/GlobalConfig.o
 
-obj/main.o: main_R.cpp
-	g++ -c main_R.cpp -o obj/main.o
+obj/main.o: main.cpp
+	g++ -c main.cpp -o obj/main.o
 
 clear:
 	rm -r obj/*

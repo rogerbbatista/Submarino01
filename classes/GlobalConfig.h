@@ -6,8 +6,8 @@
 namespace GlobalConfig
 {
     // tempo de amostragem
-    double dt; // = 0.1; // segundos
-    double pi; // = M_PI;
+    double dt();
+    double pi();
 
 } // namespace GlobalConfig
 

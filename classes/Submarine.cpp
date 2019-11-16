@@ -6,16 +6,18 @@
 
 void Submarine::beforeDraw()
 {
+    double dt = GlobalConfig::dt();
+    double pi = GlobalConfig::pi();
     // translate to (0, 0, 0)
     glTranslatef(-x, -y, -z);
 
     // rotate
-    double rotation = angular_velocity * GlobalConfig::dt * 180 / GlobalConfig::pi;
+    double rotation = angular_velocity * dt * 180 / pi;
     glRotatef(rotation, 0, 0, 1);
 
-    double x_pos = horizontal_velocity * cos(psi) * GlobalConfig::dt;
-    double y_pos = horizontal_velocity * sin(psi) * GlobalConfig::dt;
-    double z_pos = vertical_velocity * GlobalConfig::dt;
+    double x_pos = horizontal_velocity * cos(psi) * dt;
+    double y_pos = horizontal_velocity * sin(psi) * dt;
+    double z_pos = vertical_velocity * dt;
 
     glColor3f(0, 1, 0);
 }
