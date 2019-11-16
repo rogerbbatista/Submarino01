@@ -23,12 +23,12 @@ void special_handle(int key, int mousex, int mousey)
     {
     case GLUT_KEY_LEFT:
     {
-        
+        sub.rotateLeft();
         break;
     }
     case GLUT_KEY_RIGHT:
     {
-        
+        sub.rotateRight();
         break;
     }
     case GLUT_KEY_UP:

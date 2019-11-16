@@ -76,7 +76,7 @@ void Submarine::beforeDraw()
 
 void Submarine::afterDraw()
 {
-    cleanControlSignals();
+    //cleanControlSignals();
 }
 
 Submarine::Submarine()
@@ -111,6 +111,14 @@ void Submarine::cleanControlSignals()
 const Matrix& Submarine::getDirector() const
 {
     return director;
+}
+
+void Submarine::rotateLeft(){
+    sendControlSignal(0, 0, 0.0872665, 0);
+}
+
+void Submarine::rotateRight(){
+    beta_dot -= 0.1;
 }
 
 #endif // SUBMARINE_CPP

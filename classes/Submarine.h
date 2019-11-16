@@ -27,6 +27,9 @@ public:
     void sendControlSignal(double u, double alpha_dot, double beta_dot, double psi_dot);
 
     const Matrix& getDirector() const;
+
+    void rotateLeft();
+    void rotateRight();
 };
 
 #endif // SUBMARINE_H
