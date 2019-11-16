@@ -8,6 +8,13 @@
 GLdouble viewer[] = {0.0, 6.0, 10.0};
 
 Object sub;
+Object astronaut;
+Object coral;
+Object horse;
+Object old_ship;
+Object rocks;
+Object shark;
+
 Ocean ocean;
 
 void init(void)
@@ -19,6 +26,13 @@ void init(void)
     glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 20.0);
 
     sub.charge("submarine");
+    astronaut.charge("astronauta");
+    coral.charge("coral");
+    horse.charge("horse");
+    old_ship.charge("old_ship");
+    rocks.charge("rocks");
+    shark.charge("shark");
+    
     ocean.create();
     glMatrixMode(GL_MODELVIEW);
 }
