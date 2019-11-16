@@ -9,7 +9,7 @@ class Ocean
 private:
     std::vector<GLfloat> color_water;
     std::vector<GLfloat> color_ground;
-    std::vector<GLfloat> vertices;
+    std::vector< std::vector<GLfloat> > vertices;
 
 public:
     Ocean();

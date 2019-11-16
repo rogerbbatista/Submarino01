@@ -10,21 +10,21 @@ Ocean::Ocean(){
 }
 
 void Ocean::draw(){
-    glColor4fv(color_water);
+    glColor4f(color_water[0], color_water[1], color_water[2], color_water[3]);
     draw_face(0, 1, 2, 3);
     draw_face(0, 4, 6, 2);
     draw_face(7, 6, 2, 3);
     draw_face(4, 7, 3, 0);
-    glColor4fv(color_ground);
+    glColor4f(color_ground[0], color_ground[1], color_ground[2], color_ground[3]);
     draw_face(4, 5, 6, 7);
 }
 
 void Ocean::draw_face(int a, int b, int c, int d){
     glBegin(GL_QUADS);
-        glVertex3fv(vertices[a]);
-        glVertex3fv(vertices[b]);
-        glVertex3fv(vertices[c]);
-        glVertex3fv(vertices[d]);
+        glVertex3f(vertices[a][0], vertices[a][1], vertices[a][2]);
+        glVertex3f(vertices[b][0], vertices[b][1], vertices[b][2]);
+        glVertex3f(vertices[c][0], vertices[c][1], vertices[c][2]);
+        glVertex3f(vertices[d][0], vertices[d][1], vertices[d][2]);
     glEnd();
 }
 
