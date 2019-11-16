@@ -9,9 +9,6 @@ void Submarine::KinematicModel()
 {
     double dt = GlobalConfig::dt();
 
-    // centraliza o objeto completamente
-    reCenter();
-
     double d_alpha = alpha_dot * dt;
     double d_beta = beta_dot * dt;
     double d_psi = psi_dot * dt;
@@ -56,9 +53,11 @@ void Submarine::KinematicModel()
 
     director = R.dot(director);    
 
-    double d_u = u * dt;
+    Matrix d_u = director * u * dt;
 
-    // double dx = 
+    x += d_u[0][0];
+    y += d_u[0][1];
+    z += d_u[0][2];
 }
 
 void Submarine::beforeDraw()
@@ -66,10 +65,13 @@ void Submarine::beforeDraw()
     double dt = GlobalConfig::dt();
     double pi = GlobalConfig::pi();
     
-    // translate to (0, 0, 0)
-    glTranslatef(-x, -y, -z);
-    
+    // centraliza o objeto completamente
+    reCenter();
 
+    KinematicModel();
+
+    // posiciona o objeto
+    rePosition();
 
     glColor3f(0, 1, 0);
 }

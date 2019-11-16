@@ -49,7 +49,8 @@ protected:
     double alpha, beta, psi;
 
     void reCenter();
-    
+    void rePosition();
+
 public:
     Object();
     Object(std::string name);

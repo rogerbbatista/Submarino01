@@ -208,4 +208,19 @@ void Object::reCenter()
     glTranslatef(-x, -y, -z);
 }
 
+void Object::rePosition()
+{
+    double pi = GlobalConfig::pi();
+    // fazendo ao contrario pelo opengl
+
+    // translada para (0,0,0)
+    glTranslatef(x, y, z);
+    
+    // rotaciona para o centro
+    glRotatef(alpha * 180 / pi, 1, 0, 0);
+    glRotatef(beta * 180 / pi, 0, 1, 0);
+    glRotatef(psi * 180 / pi, 0, 0, 1);
+
+}
+
 #endif // OBJECT_CPP
