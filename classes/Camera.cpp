@@ -30,6 +30,8 @@ void Camera::update(Submarine &sub)
     {
         Matrix dir = sub.getDirector();
 
+        cout << dir[0][0] << " " << dir[0][1] << " " << dir[0][2] << endl;
+
         view = {
             (GLfloat)(sub.getX() + 5 * dir[0][0]),
             (GLfloat)(sub.getY() + 5 * dir[1][0]),

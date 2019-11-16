@@ -8,6 +8,7 @@
 void Submarine::KinematicModel()
 {
     double dt = GlobalConfig::dt();
+    cerr << "dt: " << dt << endl;
 
     double d_alpha = alpha_dot * dt;
     double d_beta = beta_dot * dt;
@@ -30,18 +31,18 @@ void Submarine::KinematicModel()
     c = cos(beta);
     s = sin(beta);
     Matrix Ry(4, 4);
-    Rx[0] = {c, 0, s, 0};
-    Rx[1] = {0, 1, 0, 0};
-    Rx[2] = {-s, 0, c, 0};
-    Rx[3] = {0, 0, 0, 1};
+    Ry[0] = {c, 0, s, 0};
+    Ry[1] = {0, 1, 0, 0};
+    Ry[2] = {-s, 0, c, 0};
+    Ry[3] = {0, 0, 0, 1};
 
     c = cos(psi);
     s = sin(psi);
     Matrix Rz(4, 4);
-    Rx[0] = {c, s, 0, 0};
-    Rx[1] = {-s, c, 0, 0};
-    Rx[2] = {0, 0, 1, 0};
-    Rx[3] = {0, 0, 0, 1};
+    Rz[0] = {c, s, 0, 0};
+    Rz[1] = {-s, c, 0, 0};
+    Rz[2] = {0, 0, 1, 0};
+    Rz[3] = {0, 0, 0, 1};
 
     Matrix R = Rx.dot(Ry.dot(Rz));
 
