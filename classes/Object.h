@@ -50,6 +50,7 @@ protected:
 
     void reCenter();
     void rePosition();
+    void alignAngles();
 
 public:
     Object();

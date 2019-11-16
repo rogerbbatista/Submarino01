@@ -1,6 +1,8 @@
 #ifndef SUBMARINE_CPP
 #define SUBMARINE_CPP
 
+#define DEBUG(x) cerr << #x << ": " << x << endl
+
 #include "Submarine.h"
 #include "GlobalConfig.h"
 #include "Matrix.h"
@@ -8,7 +10,8 @@
 void Submarine::KinematicModel()
 {
     double dt = GlobalConfig::dt();
-    cerr << "dt: " << dt << endl;
+    double pi = GlobalConfig::pi();
+    // cerr << "dt: " << dt << endl;
 
     double d_alpha = alpha_dot * dt;
     double d_beta = beta_dot * dt;
@@ -17,6 +20,12 @@ void Submarine::KinematicModel()
     alpha += d_alpha;
     beta += d_beta;
     psi += d_psi;
+
+    DEBUG(alpha);
+    DEBUG(beta);
+    DEBUG(psi);
+
+    alignAngles();
 
     double c, s;
 
@@ -76,7 +85,7 @@ void Submarine::beforeDraw()
 
 void Submarine::afterDraw()
 {
-    //cleanControlSignals();
+    cleanControlSignals();
 }
 
 Submarine::Submarine()
@@ -114,11 +123,12 @@ const Matrix& Submarine::getDirector() const
 }
 
 void Submarine::rotateLeft(){
-    sendControlSignal(0, 0, 0.0872665, 0);
+    sendControlSignal(0, 0, 1, 0);
 }
 
 void Submarine::rotateRight(){
-    beta_dot -= 0.1;
+    // beta_dot -= 0.1;
+    sendControlSignal(0, 0, -1, 0);
 }
 
 #endif // SUBMARINE_CPP

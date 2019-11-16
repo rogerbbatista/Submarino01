@@ -223,4 +223,45 @@ void Object::rePosition()
 
 }
 
+void Object::alignAngles()
+{
+    double pi = GlobalConfig::pi();
+
+    if(abs(alpha) > pi)
+    {
+        if(alpha < 0)
+        {
+            alpha += 2 * pi;
+        }
+        else
+        {
+            alpha -= 2 * pi;
+        }
+    }
+
+    if(abs(beta) > pi)
+    {
+        if(beta < 0)
+        {
+            beta += 2 * pi;
+        }
+        else
+        {
+            beta -= 2 * pi;
+        }
+    }
+
+    if(abs(psi) > pi)
+    {
+        if(psi < 0)
+        {
+            psi += 2 * pi;
+        }
+        else
+        {
+            psi -= 2 * pi;
+        }
+    }
+}
+
 #endif // OBJECT_CPP
