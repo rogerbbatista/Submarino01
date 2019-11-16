@@ -3,9 +3,11 @@
 
 #include "Object.h"
 
-class Submarine : Object
+class Submarine : public Object
 {
-    
+private:
+    void beforeDraw();
+
 };
 
 #endif // SUBMARINE_H

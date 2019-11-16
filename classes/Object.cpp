@@ -24,7 +24,7 @@ Object::Object() {}
 
 Object::Object(std::string name)
 {
-    std::ifstream file("../models/" + name + ".obj");
+    std::ifstream file("models/" + name + ".obj");
     if (file.is_open())
     {
 
@@ -82,14 +82,14 @@ Object::Object(std::string name)
     }
     else
     {
-        printf(("Não é possível abrir: ../models/" + name + ".obj").c_str());
+        printf(("Não é possível abrir: models/" + name + ".obj").c_str());
     }
 }
 
 void Object::draw()
 {
-    glScalef(0.5, 0.5, 0.5);
-    glColor3f(0, 1, 0);
+    beforeDraw();
+    // glColor3f(0, 1, 0);
     glBegin(GL_TRIANGLES);
     for (auto &f : faces)
     {
@@ -98,6 +98,8 @@ void Object::draw()
         glVertex3f(vertices[f.v3].x, vertices[f.v3].y, vertices[f.v3].z);
     }
     glEnd();
+
+    afterDraw();
 }
 
 void Object::charge(std::string name)
@@ -163,5 +165,8 @@ void Object::charge(std::string name)
         printf(("Não é possível abrir: models/" + name + ".obj").c_str());
     }
 }
+
+void Object::beforeDraw() {}
+void Object::afterDraw() {}
 
 #endif // OBJECT_CPP

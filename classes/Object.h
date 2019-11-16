@@ -41,6 +41,9 @@ private:
     std::vector<Vertex> normals;
     std::vector<Face> faces;
 
+    virtual void beforeDraw();
+    virtual void afterDraw();
+
 public:
     Object();
     Object(std::string name);
