@@ -15,7 +15,7 @@ class Camera{
         Camera();
         void create();
         void update(Submarine &sub);
-        void change_view();
+        void change_view(bool ins);
         const bool getInside();
         const GLfloat getX();
         const GLfloat getY();

@@ -17,6 +17,46 @@ Object shark;
 Ocean ocean;
 Camera cam;
 
+void special_handle(int key, int mousex, int mousey)
+{
+    switch (key)
+    {
+    case GLUT_KEY_LEFT:
+    {
+        
+        break;
+    }
+    case GLUT_KEY_RIGHT:
+    {
+        
+        break;
+    }
+    case GLUT_KEY_UP:
+    {
+        
+        break;
+    }
+    case GLUT_KEY_DOWN:
+    {
+        
+        break;
+    }
+
+    }
+    glutPostRedisplay();
+}
+
+void handle(unsigned char key, int mousex, int mousey)
+{
+    switch (key){
+        case "W" : case "w" : break;
+        case "S" : case "s" : break;
+        case "F" : case "f" : cam.change_view(false); break;
+        case "I" : case "i" : cam.change_view(true); break;
+        case "H" : case "h" : break;
+    }
+}
+
 void init(void)
 {
     glClearColor(1.0, 1.0, 1.0, 1.0); //cor para limpeza do buffer
@@ -70,6 +110,8 @@ int main(int argc, char **argv)
     glEnable(GL_DEPTH_TEST);                           // habilita remoção de superfícies ocultas
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // habilita transparencia
     glEnable(GL_BLEND);                                // hablita transparência
+    glutKeyboardFunc(handle);
+    glutSpecialFunc(special_handle);
     glutMainLoop();
     return 0;
 }

@@ -42,9 +42,9 @@ void Camera::update(Submarine &sub)
     }
 }
 
-void Camera::change_view()
+void Camera::change_view(bool ins)
 {
-    inside = !inside;
+    inside = ins;
 }
 
 const bool Camera::getInside()
