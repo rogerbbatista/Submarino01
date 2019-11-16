@@ -1,5 +1,8 @@
-all: obj/Object.o obj/main.o obj/Ocean.o obj/Submarine.o obj/GlobalConfig.o
+all: obj/Object.o obj/main.o obj/Ocean.o obj/Submarine.o obj/GlobalConfig.o obj/Camera.o
 	g++ obj/*.o -lglut -lGLU -lGL
+
+obj/Camera.o: classes/Camera.h classes/Camera.cpp
+	g++ -c classes/Camera.cpp -o obj/Camera.o
 
 obj/Object.o: classes/Object.h classes/Object.cpp
 	g++ -c classes/Object.cpp -o obj/Object.o

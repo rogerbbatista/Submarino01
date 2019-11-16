@@ -29,7 +29,7 @@ void Ocean::draw_face(int a, int b, int c, int d){
 }
 
 void Ocean::create(){
-    color_water = {0.0, 0.0, 1.0, 0.9};
+    color_water = {0.0, 0.0, 1.0, 0.8};
     color_ground = {0.07, 0.57, 0.21, 1.0};
     vertices = {
     {-100, 0, -100},
