@@ -20,9 +20,14 @@ void Face::reindex()
     n3--;
 }
 
-Object::Object() {}
+Object::Object()
+{
+    x = 0;
+    y = 0;
+    z = 0;
+}
 
-Object::Object(std::string name)
+Object::Object(std::string name) : Object()
 {
     std::ifstream file("models/" + name + ".obj");
     if (file.is_open())
@@ -168,5 +173,20 @@ void Object::charge(std::string name)
 
 void Object::beforeDraw() {}
 void Object::afterDraw() {}
+
+double Object::getX()
+{
+    return x;
+}
+
+double Object::getY()
+{
+    return y;
+}
+
+double Object::getz()
+{
+    return z;
+}
 
 #endif // OBJECT_CPP

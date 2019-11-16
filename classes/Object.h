@@ -44,11 +44,19 @@ private:
     virtual void beforeDraw();
     virtual void afterDraw();
 
+protected:
+    double x, y, z;
+    double alpha, beta, psi;
+
 public:
     Object();
     Object(std::string name);
     void draw();
     void charge(std::string name);
+
+    double getX();
+    double getY();
+    double getz();
 };
 
 #endif // OBJECT_H
