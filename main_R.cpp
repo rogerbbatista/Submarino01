@@ -1,35 +1,14 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "classes/Object.h"
+#include "classes/Ocean.h"
 #include <stdlib.h>
 
 //posicao do observador (camera)
 GLdouble viewer[] = {0.0, 6.0, 10.0};
-GLfloat ocean[8][3] = {{-1.0, -1.0, 1.0}, {-1.0, 1.0, 1.0}, {1.0, 1.0, 1.0}, {1.0, -1.0, 1.0},
-                    {-1.0, -1.0, -1.0}, {-1.0, 1.0, -1.0}, {1.0, 1.0, -1.0}, {1.0, -1.0, -1.0}};
 
 Object sub;
-
-void quad(int a, int b, int c, int d, int ncolor)
-{
-    glBegin(GL_QUADS);
-    glVertex3fv(ocean[a]);
-    glVertex3fv(ocean[b]);
-    glVertex3fv(ocean[c]);
-    glVertex3fv(ocean[d]);
-    glEnd();
-}
-
-void draw_ocean()
-{
-    glColor4f(0.0, 0.0, 1, 0.8);
-    // glBegin(GL_QUADS);
-    // glVertex3f(-20, 0, -10);
-    // glVertex3f(20, 0, -10);
-    // glVertex3f(20, 0, 10);
-    // glVertex3f(-20, 0, 10);
-    // glEnd();
-}
+Ocean ocean;
 
 void init(void)
 {
@@ -40,6 +19,7 @@ void init(void)
     glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 20.0);
 
     sub.charge("submarine");
+    ocean.create();
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -53,7 +33,7 @@ void display(void)
 
     sub.draw();
 
-    draw_ocean();
+    ocean.draw();
 
     glFlush();
 }
