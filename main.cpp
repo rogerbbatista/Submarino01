@@ -1,6 +1,6 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include "classes/object.cpp"
+#include "classes/Object.h"
 #include <stdlib.h>
 
 //posicao do observador (camera)

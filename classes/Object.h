@@ -42,7 +42,7 @@ private:
     std::vector<Face> faces;
 
 public:
-    Object() {}
+    Object();
     Object(std::string name);
     void draw();
     void charge(std::string name);
