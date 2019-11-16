@@ -1,5 +1,5 @@
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef OBJECT_CPP
+#define OBJECT_CPP
 
 #include <GL/gl.h>
 #include <GL/glut.h>
@@ -91,10 +91,11 @@ class Object{
                     file >> lines;
                 }
             }else{
-                printf("não deu");
+                printf(("Não é possível abrir: ../models/" + name + ".obj").c_str());
             }
         }
         void draw(){
+            glScalef(0.5, 0.5, 0.5);
             glColor3f(0, 1, 0);
             glBegin(GL_TRIANGLES);
                 for(auto &f: faces){
@@ -154,9 +155,9 @@ class Object{
                     file >> lines;
                 }
             }else{
-                printf("não deu");
+                printf(("Não é possível abrir: models/" + name + ".obj").c_str());
             }
         }
 };
 
-#endif // OBJECT_H
+#endif // OBJECT_CPP
