@@ -48,6 +48,8 @@ protected:
     double x, y, z;
     double alpha, beta, psi;
 
+    void reCenter();
+    
 public:
     Object();
     Object(std::string name);

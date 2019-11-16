@@ -6,6 +6,7 @@
 #include <bits/stdc++.h>
 
 #include "Object.h"
+#include "GlobalConfig.h"
 
 void Face::reindex()
 {
@@ -25,6 +26,10 @@ Object::Object()
     x = 0;
     y = 0;
     z = 0;
+
+    alpha = 0;
+    beta = 0;
+    psi = 0;
 }
 
 Object::Object(std::string name) : Object()
@@ -94,7 +99,7 @@ Object::Object(std::string name) : Object()
 void Object::draw()
 {
     beforeDraw();
-    // glColor3f(0, 1, 0);
+
     glBegin(GL_TRIANGLES);
     for (auto &f : faces)
     {
@@ -187,6 +192,20 @@ double Object::getY()
 double Object::getZ()
 {
     return z;
+}
+
+void Object::reCenter()
+{
+    double pi = GlobalConfig::pi();
+    // fazendo ao contrario pelo opengl
+
+    // rotaciona para o centro
+    glRotatef(-alpha * 180 / pi, 1, 0, 0);
+    glRotatef(-beta * 180 / pi, 0, 1, 0);
+    glRotatef(-psi * 180 / pi, 0, 0, 1);
+
+    // translada para (0,0,0)
+    glTranslatef(-x, -y, -z);
 }
 
 #endif // OBJECT_CPP

@@ -3,21 +3,73 @@
 
 #include "Submarine.h"
 #include "GlobalConfig.h"
+#include "Matrix.h"
+
+void Submarine::KinematicModel()
+{
+    double dt = GlobalConfig::dt();
+
+    // centraliza o objeto completamente
+    reCenter();
+
+    double d_alpha = alpha_dot * dt;
+    double d_beta = beta_dot * dt;
+    double d_psi = psi_dot * dt;
+
+    alpha += d_alpha;
+    beta += d_beta;
+    psi += d_psi;
+
+    double c, s;
+
+    c = cos(alpha);
+    s = sin(alpha);
+    Matrix Rx(4, 4);
+    Rx[0] = {1, 0, 0, 0};
+    Rx[1] = {0, c, s, 0};
+    Rx[2] = {0, -s, c, 0};
+    Rx[3] = {0, 0, 0, 1};
+
+    c = cos(beta);
+    s = sin(beta);
+    Matrix Ry(4, 4);
+    Rx[0] = {c, 0, s, 0};
+    Rx[1] = {0, 1, 0, 0};
+    Rx[2] = {-s, 0, c, 0};
+    Rx[3] = {0, 0, 0, 1};
+
+    c = cos(psi);
+    s = sin(psi);
+    Matrix Rz(4, 4);
+    Rx[0] = {c, s, 0, 0};
+    Rx[1] = {-s, c, 0, 0};
+    Rx[2] = {0, 0, 1, 0};
+    Rx[3] = {0, 0, 0, 1};
+
+    Matrix R = Rx.dot(Ry.dot(Rz));
+
+    director = Matrix(4, 1);
+    director[0][0] = 0;
+    director[1][0] = 0;
+    director[2][0] = -1;
+    director[3][0] = 1;
+
+    director = R.dot(director);    
+
+    double d_u = u * dt;
+
+    // double dx = 
+}
 
 void Submarine::beforeDraw()
 {
     double dt = GlobalConfig::dt();
     double pi = GlobalConfig::pi();
+    
     // translate to (0, 0, 0)
     glTranslatef(-x, -y, -z);
+    
 
-    // rotate
-    double rotation = angular_velocity * dt * 180 / pi;
-    glRotatef(rotation, 0, 0, 1);
-
-    double x_pos = horizontal_velocity * cos(psi) * dt;
-    double y_pos = horizontal_velocity * sin(psi) * dt;
-    double z_pos = vertical_velocity * dt;
 
     glColor3f(0, 1, 0);
 }
@@ -29,24 +81,36 @@ void Submarine::afterDraw()
 
 Submarine::Submarine()
 {
-    horizontal_velocity = 0;
-    angular_velocity = 0;
-    vertical_velocity = 0;
+    cleanControlSignals();
+
+    director = Matrix(4, 1);
+    director[0][0] = 0;
+    director[1][0] = 0;
+    director[2][0] = -1;
+    director[3][0] = 1;
+
 }
 
-void Submarine::sendControlSignal(double h_vel, double a_vel, double v_vel)
+void Submarine::sendControlSignal(double u, double alpha_dot, double beta_dot, double psi_dot)
 {
     // Without inercia
-    horizontal_velocity = h_vel;
-    angular_velocity = a_vel;
-    vertical_velocity = v_vel;
+    this->u = u;
+    this->alpha_dot = alpha_dot;
+    this->beta_dot = beta_dot;
+    this->psi_dot = psi_dot;
 }
 
 void Submarine::cleanControlSignals()
 {
-    horizontal_velocity = 0;
-    angular_velocity = 0;
-    vertical_velocity = 0;
+    u = 0;
+    alpha_dot = 0;
+    beta_dot = 0;
+    psi_dot = 0;
+}
+
+const Matrix& Submarine::getDirector() const
+{
+    return director;
 }
 
 #endif // SUBMARINE_CPP
