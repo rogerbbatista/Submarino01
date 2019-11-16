@@ -9,6 +9,7 @@ class Camera{
     private:
         std::vector<GLfloat> view;
         std::vector<GLfloat> look;
+        std::vector<GLfloat> view_up;
         bool inside;
     public:
         Camera();

@@ -12,9 +12,10 @@ Ocean::Ocean(){
 void Ocean::draw(){
     glColor4f(color_water[0], color_water[1], color_water[2], color_water[3]);
     draw_face(0, 1, 2, 3);
-    draw_face(0, 4, 6, 2);
-    draw_face(7, 6, 2, 3);
     draw_face(4, 7, 3, 0);
+    draw_face(5, 6, 2, 1);
+    draw_face(4, 5, 1, 0);
+    draw_face(7, 6, 2, 3);
     glColor4f(color_ground[0], color_ground[1], color_ground[2], color_ground[3]);
     draw_face(4, 5, 6, 7);
 }
@@ -32,14 +33,14 @@ void Ocean::create(){
     color_water = {0.0, 0.0, 1.0, 0.8};
     color_ground = {0.07, 0.57, 0.21, 1.0};
     vertices = {
-    {-100, 0, -100},
-    {100, 0, -100},
-    {100, 0, 100},
     {-100, 0, 100},
-    {-100, -100, -100},
-    {100, -100, -100},
+    {100, 0, 100},
+    {100, 0, -100},
+    {-100, 0, -100},
+    {-100, -100, 100},
     {100, -100, 100},
-    {-100, -100, 100}
+    {100, -100, -100},
+    {-100, -100, -100}
     };
 }
 
