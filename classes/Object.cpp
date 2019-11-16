@@ -184,7 +184,7 @@ double Object::getY()
     return y;
 }
 
-double Object::getz()
+double Object::getZ()
 {
     return z;
 }

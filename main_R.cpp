@@ -1,13 +1,12 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "classes/Object.h"
+#include "classes/Submarine.h"
 #include "classes/Ocean.h"
+#include "classes/Camera.h"
 #include <stdlib.h>
 
-//posicao do observador (camera)
-GLdouble viewer[] = {0.0, 6.0, 10.0};
-
-Object sub;
+Submarine sub;
 Object astronaut;
 Object coral;
 Object horse;
@@ -16,6 +15,7 @@ Object rocks;
 Object shark;
 
 Ocean ocean;
+Camera cam;
 
 void init(void)
 {
@@ -34,6 +34,8 @@ void init(void)
     shark.charge("shark");
     
     ocean.create();
+    cam.create();
+
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -41,9 +43,13 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpa a janela
     glLoadIdentity();
-    gluLookAt(viewer[0], viewer[1], viewer[2], // define posicao do observador
-              0.0, 0.0, 0.0,                   // ponto de interesse (foco)
+
+    cam.update(sub);
+
+    gluLookAt(cam.getX(), cam.getY(), cam.getZ(), // define posicao do observador
+              cam.lookX(), cam.lookY(), cam.lookZ(),                   // ponto de interesse (foco)
               0.0, 1.0, 0.0);                  // vetor de "view up"
+
 
     sub.draw();
 

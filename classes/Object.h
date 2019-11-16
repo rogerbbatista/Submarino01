@@ -56,7 +56,7 @@ public:
 
     double getX();
     double getY();
-    double getz();
+    double getZ();
 };
 
 #endif // OBJECT_H
