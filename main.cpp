@@ -83,7 +83,7 @@ void init(void)
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpa a janela
-    glLoadIdentity();
+    // glLoadIdentity();
 
     cam.update(sub);
 
@@ -97,6 +97,7 @@ void display(void)
     ocean.draw();
 
     glFlush();
+    glutPostRedisplay();
 }
 
 int main(int argc, char **argv)

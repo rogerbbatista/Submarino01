@@ -62,9 +62,6 @@ void Submarine::KinematicModel()
 
 void Submarine::beforeDraw()
 {
-    double dt = GlobalConfig::dt();
-    double pi = GlobalConfig::pi();
-    
     // centraliza o objeto completamente
     reCenter();
 
