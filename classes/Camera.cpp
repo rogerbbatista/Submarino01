@@ -21,7 +21,7 @@ void Camera::create()
 
 void Camera::update(Submarine &sub)
 {
-    if (!inside)
+    if (inside)
     {
         view = {(GLfloat)sub.getX(), (GLfloat)sub.getY() + 6, (GLfloat)sub.getZ() + 10};
         look = {(GLfloat)sub.getX(), (GLfloat)sub.getY(), (GLfloat)sub.getZ()};
@@ -80,6 +80,21 @@ const GLfloat Camera::lookY()
 const GLfloat Camera::lookZ()
 {
     return look[2];
+}
+
+const GLfloat Camera::view_upX()
+{
+    return view_up[0];
+}
+
+const GLfloat Camera::view_upY()
+{
+    return view_up[1];
+}
+
+const GLfloat Camera::view_upZ()
+{
+    return view_up[2];
 }
 
 #endif // CAMERA_CPP

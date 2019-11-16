@@ -23,6 +23,9 @@ class Camera{
         const GLfloat lookX();
         const GLfloat lookY();
         const GLfloat lookZ();
+        const GLfloat view_upX();
+        const GLfloat view_upY();
+        const GLfloat view_upZ();
 };
 
 #endif // CAMERA_H
