@@ -55,7 +55,7 @@ void handle(unsigned char key, int mousex, int mousey)
         case 'I' : case 'i' : cam.change_view(true); break;
         case 'H' : case 'h' : break;
     }
-    
+    glutPostRedisplay();
 }
 
 void init(void)
@@ -83,7 +83,7 @@ void init(void)
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpa a janela
-    // glLoadIdentity();
+    glLoadIdentity();
 
     cam.update(sub);
 
@@ -97,7 +97,6 @@ void display(void)
     ocean.draw();
 
     glFlush();
-    glutPostRedisplay();
 }
 
 int main(int argc, char **argv)
