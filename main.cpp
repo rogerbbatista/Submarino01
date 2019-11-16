@@ -46,7 +46,7 @@ void display(void)
 
     cam.update(sub);
 
-    gluLookAt(cam.viewX(), cam.viewY(), cam.viewZ(), // define posicao do observador
+    gluLookAt(cam.getX(), cam.getY(), cam.getZ(), // define posicao do observador
               cam.lookX(), cam.lookY(), cam.lookZ(),                   // ponto de interesse (foco)
               cam.view_upX(), cam.view_upY(), cam.view_upZ());                  // vetor de "view up"
 
