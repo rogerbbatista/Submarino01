@@ -49,12 +49,13 @@ void special_handle(int key, int mousex, int mousey)
 void handle(unsigned char key, int mousex, int mousey)
 {
     switch (key){
-        case "W" : case "w" : break;
-        case "S" : case "s" : break;
-        case "F" : case "f" : cam.change_view(false); break;
-        case "I" : case "i" : cam.change_view(true); break;
-        case "H" : case "h" : break;
+        case 'W' : case 'w' : break;
+        case 'S' : case 's' : break;
+        case 'F' : case 'f' : cam.change_view(false); break;
+        case 'I' : case 'i' : cam.change_view(true); break;
+        case 'H' : case 'h' : break;
     }
+    
 }
 
 void init(void)

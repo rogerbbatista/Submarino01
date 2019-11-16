@@ -21,7 +21,7 @@ void Camera::create()
 
 void Camera::update(Submarine &sub)
 {
-    if (inside)
+    if (!inside)
     {
         view = {(GLfloat)sub.getX(), (GLfloat)sub.getY() + 6, (GLfloat)sub.getZ() + 10};
         look = {(GLfloat)sub.getX(), (GLfloat)sub.getY(), (GLfloat)sub.getZ()};
