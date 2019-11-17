@@ -61,7 +61,7 @@ public:
     Object(std::string name);
     void draw();
     void charge(std::string name);
-    void setPosition(const GLfloat x, const GLfloat y, const GLfloat z);
+    void setPosition(GLfloat x, GLfloat y, GLfloat z);
 
     double getX();
     double getY();

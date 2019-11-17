@@ -28,7 +28,7 @@ void Face::reindex()
     n3--;
 }
 
-void Object::setPosition(const GLfloat x, const GLfloat y, const GLfloat z)
+void Object::setPosition(GLfloat x, GLfloat y, GLfloat z)
 {
     this->x = x;
     this->y = y;
@@ -121,11 +121,6 @@ Object::Object(std::string name) : Object()
 void Object::draw()
 {
     glPushMatrix();
-<<<<<<< HEAD
-=======
-    // glLoadIdentity();
-
->>>>>>> 3b71a8c4e2eb119ca8cd43273b26c00c724b312d
     beforeDraw();
 
     glBegin(GL_TRIANGLES);
@@ -138,10 +133,6 @@ void Object::draw()
     glEnd();
 
     afterDraw();
-<<<<<<< HEAD
-=======
-
->>>>>>> 3b71a8c4e2eb119ca8cd43273b26c00c724b312d
     glPopMatrix();
 }
 

@@ -85,7 +85,6 @@ void init(void)
     glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 200.0);
 
     sub.charge("submarine");
-<<<<<<< HEAD
 
     for (auto &a: astronaut) a.charge("astronauta");
     astronaut[0].setPosition(0,-35,-85);
@@ -119,17 +118,7 @@ void init(void)
     shark[1].setPosition(35, -70, -65);
     shark[2].setPosition(25, -30, 25);
     
-    ocean.create();
-=======
-    astronaut.charge("astronauta");
-    coral.charge("coral");
-    horse.charge("horse");
-    old_ship.charge("old_ship");
-    rocks.charge("rocks");
-    shark.charge("shark");
-
-    ocean.create(10);
->>>>>>> 3b71a8c4e2eb119ca8cd43273b26c00c724b312d
+    ocean.create(100);
     cam.create();
 
     glMatrixMode(GL_MODELVIEW);
