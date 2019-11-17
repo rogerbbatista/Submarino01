@@ -30,6 +30,12 @@ public:
 
     void rotateLeft();
     void rotateRight();
+
+    void walkFront();
+    void walkBack();
+
+    void up();
+    void down();
 };
 
 #endif // SUBMARINE_H

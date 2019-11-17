@@ -48,9 +48,13 @@ protected:
     double x, y, z;
     double alpha, beta, psi;
 
+    double n_x, n_y, n_z;
+    double n_alpha, n_beta, n_psi;
+
     void reCenter();
     void rePosition();
     void alignAngles();
+    void updateValues();
 
 public:
     Object();

@@ -33,27 +33,45 @@ void special_handle(int key, int mousex, int mousey)
     }
     case GLUT_KEY_UP:
     {
-        
+        sub.up();
         break;
     }
     case GLUT_KEY_DOWN:
     {
-        
+        sub.down();
         break;
     }
-
     }
     glutPostRedisplay();
 }
 
 void handle(unsigned char key, int mousex, int mousey)
 {
-    switch (key){
-        case 'W' : case 'w' : break;
-        case 'S' : case 's' : break;
-        case 'F' : case 'f' : cam.change_view(false); break;
-        case 'I' : case 'i' : cam.change_view(true); break;
-        case 'H' : case 'h' : break;
+    switch (key)
+    {
+    case 'W':
+    case 'w':
+    {
+        sub.walkFront();
+        break;
+    }
+    case 'S':
+    case 's':
+    {
+        sub.walkBack();
+        break;
+    }
+    case 'F':
+    case 'f':
+        cam.change_view(false);
+        break;
+    case 'I':
+    case 'i':
+        cam.change_view(true);
+        break;
+    case 'H':
+    case 'h':
+        break;
     }
     glutPostRedisplay();
 }
@@ -67,6 +85,7 @@ void init(void)
     glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 200.0);
 
     sub.charge("submarine");
+<<<<<<< HEAD
 
     for (auto &a: astronaut) a.charge("astronauta");
     astronaut[0].setPosition(0,-35,-85);
@@ -101,6 +120,16 @@ void init(void)
     shark[2].setPosition(25, -30, 25);
     
     ocean.create();
+=======
+    astronaut.charge("astronauta");
+    coral.charge("coral");
+    horse.charge("horse");
+    old_ship.charge("old_ship");
+    rocks.charge("rocks");
+    shark.charge("shark");
+
+    ocean.create(10);
+>>>>>>> 3b71a8c4e2eb119ca8cd43273b26c00c724b312d
     cam.create();
 
     glMatrixMode(GL_MODELVIEW);
@@ -113,10 +142,9 @@ void display(void)
 
     cam.update(sub);
 
-    gluLookAt(cam.getX(), cam.getY(), cam.getZ(), // define posicao do observador
-              cam.lookX(), cam.lookY(), cam.lookZ(),                   // ponto de interesse (foco)
-              cam.view_upX(), cam.view_upY(), cam.view_upZ());                  // vetor de "view up"
-
+    gluLookAt(cam.getX(), cam.getY(), cam.getZ(),              // define posicao do observador
+              cam.lookX(), cam.lookY(), cam.lookZ(),           // ponto de interesse (foco)
+              cam.view_upX(), cam.view_upY(), cam.view_upZ()); // vetor de "view up"
 
     for (auto &a: astronaut) a.draw();
     for (auto &c: coral) c.draw();
