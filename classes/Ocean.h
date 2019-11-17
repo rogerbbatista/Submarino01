@@ -15,7 +15,7 @@ public:
     Ocean();
     void draw();
     void draw_face(int a, int b, int c, int d);
-    void create();
+    void create(int tam);
 };
 
 #endif // OCEAN_H

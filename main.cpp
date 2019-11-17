@@ -33,27 +33,45 @@ void special_handle(int key, int mousex, int mousey)
     }
     case GLUT_KEY_UP:
     {
-        
+        sub.up();
         break;
     }
     case GLUT_KEY_DOWN:
     {
-        
+        sub.down();
         break;
     }
-
     }
     glutPostRedisplay();
 }
 
 void handle(unsigned char key, int mousex, int mousey)
 {
-    switch (key){
-        case 'W' : case 'w' : break;
-        case 'S' : case 's' : break;
-        case 'F' : case 'f' : cam.change_view(false); break;
-        case 'I' : case 'i' : cam.change_view(true); break;
-        case 'H' : case 'h' : break;
+    switch (key)
+    {
+    case 'W':
+    case 'w':
+    {
+        sub.walkFront();
+        break;
+    }
+    case 'S':
+    case 's':
+    {
+        sub.walkBack();
+        break;
+    }
+    case 'F':
+    case 'f':
+        cam.change_view(false);
+        break;
+    case 'I':
+    case 'i':
+        cam.change_view(true);
+        break;
+    case 'H':
+    case 'h':
+        break;
     }
     glutPostRedisplay();
 }
@@ -73,8 +91,8 @@ void init(void)
     old_ship.charge("old_ship");
     rocks.charge("rocks");
     shark.charge("shark");
-    
-    ocean.create();
+
+    ocean.create(10);
     cam.create();
 
     glMatrixMode(GL_MODELVIEW);
@@ -87,10 +105,9 @@ void display(void)
 
     cam.update(sub);
 
-    gluLookAt(cam.getX(), cam.getY(), cam.getZ(), // define posicao do observador
-              cam.lookX(), cam.lookY(), cam.lookZ(),                   // ponto de interesse (foco)
-              cam.view_upX(), cam.view_upY(), cam.view_upZ());                  // vetor de "view up"
-
+    gluLookAt(cam.getX(), cam.getY(), cam.getZ(),              // define posicao do observador
+              cam.lookX(), cam.lookY(), cam.lookZ(),           // ponto de interesse (foco)
+              cam.view_upX(), cam.view_upY(), cam.view_upZ()); // vetor de "view up"
 
     sub.draw();
 

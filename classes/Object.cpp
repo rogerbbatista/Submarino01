@@ -8,6 +8,13 @@
 #include "Object.h"
 #include "GlobalConfig.h"
 
+using namespace std;
+
+#ifndef DEBUG
+#define DEBUG(x) std::cerr << #x << ": " << x << std::endl
+#endif
+
+
 void Face::reindex()
 {
     v1--;
@@ -30,6 +37,14 @@ Object::Object()
     alpha = 0;
     beta = 0;
     psi = 0;
+
+    n_x = 0;
+    n_y = 0;
+    n_z = 0;
+
+    n_alpha = 0;
+    n_beta = 0;
+    n_psi = 0;
 }
 
 Object::Object(std::string name) : Object()
@@ -98,6 +113,9 @@ Object::Object(std::string name) : Object()
 
 void Object::draw()
 {
+    glPushMatrix();
+    // glLoadIdentity();
+
     beforeDraw();
 
     glBegin(GL_TRIANGLES);
@@ -110,6 +128,8 @@ void Object::draw()
     glEnd();
 
     afterDraw();
+
+    glPopMatrix();
 }
 
 void Object::charge(std::string name)
@@ -214,12 +234,18 @@ void Object::rePosition()
     // fazendo ao contrario pelo opengl
 
     // translada para (0,0,0)
-    glTranslatef(x, y, z);
+    glTranslatef(n_x, n_y, n_z);
+
+    // DEBUG(n_alpha);
+    // DEBUG(n_beta);
+    // DEBUG(n_psi);
     
     // rotaciona para o centro
-    glRotatef(alpha * 180 / pi, 1, 0, 0);
-    glRotatef(beta * 180 / pi, 0, 1, 0);
-    glRotatef(psi * 180 / pi, 0, 0, 1);
+    glRotatef(n_alpha * 180 / pi, 1, 0, 0);
+    glRotatef(n_beta * 180 / pi, 0, 1, 0);
+    glRotatef(n_psi * 180 / pi, 0, 0, 1);
+
+    // cerr << "o erro nao foi aq" << endl;
 
 }
 
@@ -262,6 +288,53 @@ void Object::alignAngles()
             psi -= 2 * pi;
         }
     }
+
+    if(abs(n_alpha) > pi)
+    {
+        if(n_alpha < 0)
+        {
+            n_alpha += 2 * pi;
+        }
+        else
+        {
+            n_alpha -= 2 * pi;
+        }
+    }
+
+    if(abs(n_beta) > pi)
+    {
+        if(n_beta < 0)
+        {
+            n_beta += 2 * pi;
+        }
+        else
+        {
+            n_beta -= 2 * pi;
+        }
+    }
+
+    if(abs(n_psi) > pi)
+    {
+        if(n_psi < 0)
+        {
+            n_psi += 2 * pi;
+        }
+        else
+        {
+            n_psi -= 2 * pi;
+        }
+    }
+}
+
+void Object::updateValues()
+{
+    x = n_x;
+    y = n_y;
+    z = n_z;
+
+    alpha = n_alpha;
+    beta = n_beta;
+    psi = n_psi;
 }
 
 #endif // OBJECT_CPP
