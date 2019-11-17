@@ -57,6 +57,7 @@ public:
     Object(std::string name);
     void draw();
     void charge(std::string name);
+    void setPosition(const GLfloat x, const GLfloat y, const GLfloat z);
 
     double getX();
     double getY();

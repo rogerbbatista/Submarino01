@@ -21,6 +21,13 @@ void Face::reindex()
     n3--;
 }
 
+void Object::setPosition(const GLfloat x, const GLfloat y, const GLfloat z)
+{
+    this->x = x;
+    this->y = y;
+    this->z = z;
+}
+
 Object::Object()
 {
     x = 0;
@@ -98,6 +105,7 @@ Object::Object(std::string name) : Object()
 
 void Object::draw()
 {
+    glPushMatrix();
     beforeDraw();
 
     glBegin(GL_TRIANGLES);
@@ -110,6 +118,7 @@ void Object::draw()
     glEnd();
 
     afterDraw();
+    glPopMatrix();
 }
 
 void Object::charge(std::string name)
@@ -176,8 +185,13 @@ void Object::charge(std::string name)
     }
 }
 
-void Object::beforeDraw() {}
-void Object::afterDraw() {}
+void Object::beforeDraw() {
+    glTranslatef(x, y, z);    
+}
+
+void Object::afterDraw() {
+    
+}
 
 double Object::getX()
 {

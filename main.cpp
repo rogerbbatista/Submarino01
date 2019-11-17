@@ -7,12 +7,12 @@
 #include <stdlib.h>
 
 Submarine sub;
-Object astronaut;
-Object coral;
-Object horse;
-Object old_ship;
-Object rocks;
-Object shark;
+Object astronaut[5];
+Object coral[5];
+Object horse[3];
+Object old_ship[2];
+Object rocks[2];
+Object shark[3];
 
 Ocean ocean;
 Camera cam;
@@ -67,12 +67,38 @@ void init(void)
     glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 200.0);
 
     sub.charge("submarine");
-    astronaut.charge("astronauta");
-    coral.charge("coral");
-    horse.charge("horse");
-    old_ship.charge("old_ship");
-    rocks.charge("rocks");
-    shark.charge("shark");
+
+    for (auto &a: astronaut) a.charge("astronauta");
+    astronaut[0].setPosition(0,-35,-85);
+    astronaut[1].setPosition(-55,-25,-55);
+    astronaut[2].setPosition(0,-15,5);
+    astronaut[3].setPosition(55,-20,85);
+    astronaut[4].setPosition(75,-30,85);
+
+    for (auto &c: coral) c.charge("coral");
+    coral[0].setPosition(-85,-20,-85);
+    coral[1].setPosition(85,-20,-25);
+    coral[2].setPosition(25,-20,55);
+    coral[3].setPosition(-25,-20,55);
+    coral[4].setPosition(-45,-20,85);
+
+    for (auto &h: horse) h.charge("horse");
+    horse[0].setPosition(-5,-20,-25);
+    horse[1].setPosition(-45,-15,35);
+    horse[2].setPosition(85,-30,-75);
+
+    for (auto &o: old_ship) o.charge("old_ship");
+    old_ship[0].setPosition(10,0,-10);
+    old_ship[1].setPosition(0,0,90);
+
+    for (auto &r: rocks) r.charge("rocks");
+    rocks[0].setPosition(-45,-20,-85);
+    rocks[1].setPosition(85,-20,55);
+
+    for (auto &s: shark) s.charge("shark");
+    shark[0].setPosition(-90,-50, 85);
+    shark[1].setPosition(35, -70, -65);
+    shark[2].setPosition(25, -30, 25);
     
     ocean.create();
     cam.create();
@@ -91,6 +117,13 @@ void display(void)
               cam.lookX(), cam.lookY(), cam.lookZ(),                   // ponto de interesse (foco)
               cam.view_upX(), cam.view_upY(), cam.view_upZ());                  // vetor de "view up"
 
+
+    for (auto &a: astronaut) a.draw();
+    for (auto &c: coral) c.draw();
+    for (auto &h: horse) h.draw();
+    for (auto &o: old_ship) o.draw();
+    for (auto &r: rocks) r.draw();
+    for (auto &s: shark) s.draw();
 
     sub.draw();
 
