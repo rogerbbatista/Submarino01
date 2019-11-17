@@ -33,6 +33,10 @@ public:
     vector<double> &operator[](int i);
 
     const vector<double> &operator[](int i) const;
+
+    friend ostream& operator<< (ostream &out, const Matrix& m);
+
+    friend const Matrix operator*(double value, Matrix &m);
 };
 
 #endif //MATRIX_H

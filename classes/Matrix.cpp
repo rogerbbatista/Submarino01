@@ -142,4 +142,23 @@ const vector<double>& Matrix::operator[](int i) const
     return this->m[i];
 }
 
+ostream& operator<< (ostream &out, const Matrix& m)
+{
+    for(int i = 0; i < m.shape0; i++)
+    {
+        for(int j = 0; j < m.shape1; j++)
+        {
+            out << m[i][j] << " ";
+        }
+        out << endl;
+    }
+
+    return out;
+}
+
+const Matrix operator*(double value, Matrix &m)
+{
+    return m * value;
+}
+
 #endif //MATRIX_CPP

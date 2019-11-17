@@ -49,9 +49,11 @@ Object::Object()
     n_y = 0;
     n_z = 0;
 
-    n_alpha = 0;
-    n_beta = 0;
-    n_psi = 0;
+    d_alpha = 0;
+    d_beta = 0;
+    d_psi = 0;
+
+    rotationMatrix = GlobalConfig::getRotate(0, 0, 0);
 }
 
 Object::Object(std::string name) : Object()
@@ -121,7 +123,11 @@ Object::Object(std::string name) : Object()
 void Object::draw()
 {
     glPushMatrix();
+    // glMatrixMode(GL_MODELVIEW);
+    // glLoadIdentity();
+
     beforeDraw();
+
 
     glBegin(GL_TRIANGLES);
     for (auto &f : faces)
@@ -226,15 +232,18 @@ double Object::getZ()
 void Object::reCenter()
 {
     double pi = GlobalConfig::pi();
-    // fazendo ao contrario pelo opengl
+
+    // DEBUG(-psi * 180 / pi);
+    // DEBUG(-beta * 180 / pi);
+    // DEBUG(-alpha * 180 / pi);
 
     // rotaciona para o centro
-    glRotatef(-alpha * 180 / pi, 1, 0, 0);
-    glRotatef(-beta * 180 / pi, 0, 1, 0);
-    glRotatef(-psi * 180 / pi, 0, 0, 1);
+    // glRotatef(-psi * 180 / pi, 0, 0, 1);
+    // glRotatef(-beta * 180 / pi, 0, 1, 0);
+    // glRotatef(-alpha * 180 / pi, 1, 0, 0);
 
     // translada para (0,0,0)
-    glTranslatef(-x, -y, -z);
+    // glTranslatef(-x, -y, -z);
 }
 
 void Object::rePosition()
@@ -245,14 +254,14 @@ void Object::rePosition()
     // translada para (0,0,0)
     glTranslatef(n_x, n_y, n_z);
 
-    // DEBUG(n_alpha);
-    // DEBUG(n_beta);
-    // DEBUG(n_psi);
+    DEBUG(alpha);
+    DEBUG(beta);
+    DEBUG(psi);
     
-    // rotaciona para o centro
-    glRotatef(n_alpha * 180 / pi, 1, 0, 0);
-    glRotatef(n_beta * 180 / pi, 0, 1, 0);
-    glRotatef(n_psi * 180 / pi, 0, 0, 1);
+    // rotaciona
+    glRotatef(alpha * 180 / pi, 1, 0, 0);
+    glRotatef(beta * 180 / pi, 0, 1, 0);
+    glRotatef(psi * 180 / pi, 0, 0, 1);
 
     // cerr << "o erro nao foi aq" << endl;
 
@@ -298,39 +307,39 @@ void Object::alignAngles()
         }
     }
 
-    if(abs(n_alpha) > pi)
+    if(abs(d_alpha) > pi)
     {
-        if(n_alpha < 0)
+        if(d_alpha < 0)
         {
-            n_alpha += 2 * pi;
+            d_alpha += 2 * pi;
         }
         else
         {
-            n_alpha -= 2 * pi;
+            d_alpha -= 2 * pi;
         }
     }
 
-    if(abs(n_beta) > pi)
+    if(abs(d_beta) > pi)
     {
-        if(n_beta < 0)
+        if(d_beta < 0)
         {
-            n_beta += 2 * pi;
+            d_beta += 2 * pi;
         }
         else
         {
-            n_beta -= 2 * pi;
+            d_beta -= 2 * pi;
         }
     }
 
-    if(abs(n_psi) > pi)
+    if(abs(d_psi) > pi)
     {
-        if(n_psi < 0)
+        if(d_psi < 0)
         {
-            n_psi += 2 * pi;
+            d_psi += 2 * pi;
         }
         else
         {
-            n_psi -= 2 * pi;
+            d_psi -= 2 * pi;
         }
     }
 }
@@ -341,9 +350,17 @@ void Object::updateValues()
     y = n_y;
     z = n_z;
 
-    alpha = n_alpha;
-    beta = n_beta;
-    psi = n_psi;
+    alpha += d_alpha;
+    beta += d_beta;
+    psi += d_psi;
+
+    alignAngles();
+}
+
+void Object::updateRotation(double d_alpha, double d_beta, double d_psi)
+{
+    Matrix R = GlobalConfig::getRotate(d_alpha, d_beta, d_psi);
+    rotationMatrix = R.dot(rotationMatrix);
 }
 
 #endif // OBJECT_CPP

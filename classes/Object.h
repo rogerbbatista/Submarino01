@@ -5,6 +5,8 @@
 #include <GL/glut.h>
 #include <bits/stdc++.h>
 
+#include "Matrix.h"
+
 struct Vertex
 {
     GLfloat x;
@@ -44,12 +46,14 @@ private:
     virtual void beforeDraw();
     virtual void afterDraw();
 
+    Matrix rotationMatrix;
+
 protected:
     double x, y, z;
     double alpha, beta, psi;
 
     double n_x, n_y, n_z;
-    double n_alpha, n_beta, n_psi;
+    double d_alpha, d_beta, d_psi;
 
     void reCenter();
     void rePosition();
@@ -62,6 +66,7 @@ public:
     void draw();
     void charge(std::string name);
     void setPosition(GLfloat x, GLfloat y, GLfloat z);
+    void updateRotation(double d_alpha, double d_beta, double d_psi);
 
     double getX();
     double getY();

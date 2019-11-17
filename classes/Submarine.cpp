@@ -14,47 +14,19 @@ void Submarine::KinematicModel()
     double dt = GlobalConfig::dt();
     double pi = GlobalConfig::pi();
 
-    double d_alpha = alpha_dot * dt;
-    double d_beta = beta_dot * dt;
-    double d_psi = psi_dot * dt;
+    d_alpha = alpha_dot * dt;
+    d_beta = beta_dot * dt;
+    d_psi = psi_dot * dt;
 
-    n_alpha = alpha + d_alpha;
-    n_beta = beta + d_beta;
-    n_psi = psi + d_psi;
-
-    // DEBUG(n_alpha);
-    // DEBUG(n_beta);
-    // DEBUG(n_psi);
+    DEBUG(d_alpha);
+    DEBUG(d_beta);
+    DEBUG(d_psi);
 
     alignAngles();
 
-    double c, s;
-
-    c = cos(n_alpha);
-    s = sin(n_alpha);
-    Matrix Rx(4, 4);
-    Rx[0] = {1, 0, 0, 0};
-    Rx[1] = {0, c, -s, 0};
-    Rx[2] = {0, s, c, 0};
-    Rx[3] = {0, 0, 0, 1};
-
-    c = cos(n_beta);
-    s = sin(n_beta);
-    Matrix Ry(4, 4);
-    Ry[0] = {c, 0, -s, 0};
-    Ry[1] = {0, 1, 0, 0};
-    Ry[2] = {s, 0, c, 0};
-    Ry[3] = {0, 0, 0, 1};
-
-    c = cos(n_psi);
-    s = sin(n_psi);
-    Matrix Rz(4, 4);
-    Rz[0] = {c, -s, 0, 0};
-    Rz[1] = {s, c, 0, 0};
-    Rz[2] = {0, 0, 1, 0};
-    Rz[3] = {0, 0, 0, 1};
-
-    Matrix R = Rx.dot(Ry.dot(Rz));
+    Matrix R1 = GlobalConfig::getRotate(alpha, beta, psi);
+    Matrix R2 = GlobalConfig::getRotate(d_alpha, d_beta, d_psi);
+    Matrix R = R2.dot(R1);
 
     director = Matrix(4, 1);
     director[0][0] = 0;
@@ -66,9 +38,13 @@ void Submarine::KinematicModel()
 
     Matrix d_u = director * u * dt;
 
-    DEBUG(n_x);
-    DEBUG(n_y);
-    DEBUG(n_z);
+    // DEBUG(n_x);
+    // DEBUG(n_y);
+    // DEBUG(n_z);
+    // DEBUG(d_u);
+
+    // DEBUG(director);
+    // DEBUG(d_u);
 
     n_x = x + d_u[0][0];
     n_y = y + d_u[0][1];
@@ -79,15 +55,19 @@ void Submarine::beforeDraw()
 {
     KinematicModel();
 
+    // Open GL begin
+
+    // translada o objeto pra (0,0,0)
+    reCenter();
+    
     // posiciona o objeto
     rePosition();
+    
+    glColor3f(0, 1, 0);
 
-    // centraliza o objeto completamente
-    reCenter();
+    // Open GL end
 
     updateValues();
-
-    glColor3f(0, 1, 0);
 }
 
 void Submarine::afterDraw()
@@ -130,22 +110,22 @@ const Matrix &Submarine::getDirector() const
 
 void Submarine::rotateLeft()
 {
-    sendControlSignal(0, 0, 0.1, 0);
+    sendControlSignal(0, 0, 1, 0);
 }
 
 void Submarine::rotateRight()
 {
-    sendControlSignal(0, 0, -0.1, 0);
+    sendControlSignal(0, 0, -1, 0);
 }
 
 void Submarine::walkFront()
 {
-    sendControlSignal(0.1, 0, 0, 0);
+    sendControlSignal(1, 0, 0, 0);
 }
 
 void Submarine::walkBack()
 {
-    sendControlSignal(-0.1, 0, 0, 0);
+    sendControlSignal(-1, 0, 0, 0);
 }
 
 void Submarine::up()
