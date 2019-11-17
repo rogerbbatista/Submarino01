@@ -146,13 +146,13 @@ void display(void)
 
     ocean.draw();
 
-    glFlush();
+    glutSwapBuffers();
 }
 
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);                                                       // inicializa a glut
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);                    // tipo de buffer/cores/profundidade
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);                    // tipo de buffer/cores/profundidade
     glutInitWindowSize(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT)); // dimensões da janela
     glutInitWindowPosition(0, 0);                                                // posicao da janela
     glutCreateWindow("Submarino");                                               // cria a janela
