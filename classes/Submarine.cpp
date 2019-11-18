@@ -26,7 +26,7 @@ void Submarine::KinematicModel()
     alignAngles();
 
     // aplicar no vetor normal
-    Matrix R1 = GlobalConfig::getRotate(alpha, 0, psi);
+    Matrix R1 = GlobalConfig::getRotate(0, 0, psi);
 
     normalVector = Matrix(4, 1);
     normalVector[0][0] = 0;

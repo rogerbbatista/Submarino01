@@ -25,8 +25,6 @@ void Camera::update(Submarine &sub)
 
     if (!inside)
     {
-        Matrix norm = sub.getNormal();
-
         view = {
             (GLfloat)(sub.getX() - 10 * dir[0][0]),
             (GLfloat)(sub.getY() - 10 * dir[1][0] + 6),
@@ -35,14 +33,13 @@ void Camera::update(Submarine &sub)
         look = {(GLfloat)sub.getX(),
                 (GLfloat)sub.getY(),
                 (GLfloat)sub.getZ()};
-
-        // view_up = {
-        //     (GLfloat)norm[0][0],
-        //     (GLfloat)norm[1][0],
-        //     (GLfloat)norm[2][0]};
+        
+        view_up = {0.0, 1.0, 0.0};
     }
     else
     {
+        Matrix norm = sub.getNormal();
+        
         view = {
             (GLfloat)(sub.getX() + 5 * dir[0][0]),
             (GLfloat)(sub.getY() + 5 * dir[1][0]),
@@ -53,7 +50,10 @@ void Camera::update(Submarine &sub)
             (GLfloat)(sub.getY() + 15 * dir[1][0]),
             (GLfloat)(sub.getZ() + 15 * dir[2][0])};
 
-        // view_up = {0.0, 1.0, 0.0};
+        view_up = {
+            (GLfloat)norm[0][0],
+            (GLfloat)norm[1][0],
+            (GLfloat)norm[2][0]};
     }
 }
 
