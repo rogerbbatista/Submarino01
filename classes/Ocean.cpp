@@ -12,8 +12,9 @@ Ocean::Ocean()
 
 void Ocean::draw()
 {
-    glColor4f(color_water[0], color_water[1], color_water[2], color_water[3]);
+    glColor4f(color_water[0], color_water[1], color_water[2], 0.9);
     draw_face(0, 1, 2, 3);
+    glColor4f(color_water[0], color_water[1], color_water[2], color_water[3]);
     draw_face(4, 7, 3, 0);
     draw_face(5, 6, 2, 1);
     draw_face(4, 5, 1, 0);

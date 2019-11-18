@@ -9,3 +9,4 @@ https://free3d.com/3d-model/aquarium-deep-sea-diver-v1--436500.html
 https://free3d.com/3d-model/box-car-v1--508154.html
 https://free3d.com/3d-model/-horse-v01--801409.html
 https://free3d.com/3d-model/rocks--43124.html
+https://stackoverflow.com/questions/5467218/opengl-2d-hud-over-3d

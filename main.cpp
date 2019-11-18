@@ -4,6 +4,7 @@
 #include "classes/Submarine.h"
 #include "classes/Ocean.h"
 #include "classes/Camera.h"
+#include "classes/Help.h"
 #include "classes/GlobalConfig.h"
 #include <stdlib.h>
 
@@ -39,6 +40,7 @@ Object shark[3];
 
 Ocean ocean;
 Camera cam;
+Help help;
 
 const double pi = M_PI;
 
@@ -214,6 +216,7 @@ void init(void)
 
     ocean.create(200);
     cam.create();
+    help.create();
 
     glMatrixMode(GL_MODELVIEW);
 }
@@ -245,6 +248,8 @@ void display(void)
     sub.draw();
 
     ocean.draw();
+
+    help.draw();
 
     glutSwapBuffers();
 }
@@ -282,6 +287,9 @@ void mainLoop(int key)
         cam.change_view(false);
     if (keyboard.i)
         cam.change_view(true);
+
+    if (keyboard.h)
+        help.toogle();
 
     sub.sendControlSignal(u, alpha_dot, beta_dot, psi_dot, flutuation_dot);
 
