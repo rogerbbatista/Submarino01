@@ -8,76 +8,97 @@
 
 #include "Help.h"
 
-Help::Help(){}
+using namespace std;
 
-void Help::create(){
+Help::Help() {}
+
+void Help::create()
+{
     toogled = true;
 }
 
-void Help::toogle(){
+void Help::toggle()
+{
     toogled = !toogled;
 }
 
-void Help::draw(){
-    if (toogled){
-        int width = glutGet(GLUT_SCREEN_WIDTH);
-        int height = glutGet(GLUT_SCREEN_HEIGHT);
+void Help::draw()
+{
+    if (toogled)
+    {
+        double width = glutGet(GLUT_SCREEN_WIDTH);
+        double height = glutGet(GLUT_SCREEN_HEIGHT);
 
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
 
-            glLoadIdentity();
-            glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
+        glLoadIdentity();
+        glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
 
-            glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
 
-            glDisable(GL_CULL_FACE);
+        glDisable(GL_CULL_FACE);
 
-            glClear(GL_DEPTH_BUFFER_BIT);
+        double scaleFactor = 0.5;
 
-            glColor3f(1, 1, 1);
-            int text_height = height/20;
-            int text_padding = (height/2 - text_height*9)/8;
-            
-            int h = text_height;
-            int w = width - width/3 + width/100;
-            TEXT::texto("Tecla UP - Inclinar para cima.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla DOWN - Inclinar para baixo.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla 8 - Rotação anti-horária sobre X.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla 2 - Rotação horária sobre X.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla LEFT/A - Rotação anti-horária sobre Y.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla RIGHT/D - Rotação horária sobre Y.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla 4 - Rotação anti-horária sobre Z.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla 6 - Rotação horária sobre Z.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla F - Ponto de vista externo.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla I - Ponto de vista interno.", w, h, 0.2, -0.2);
-            h += text_height + text_padding;
-            TEXT::texto("Tecla H - Mostrar/Ocultar menu de ajuda.", w, h, 0.2, -0.2);
+        glScalef(scaleFactor, scaleFactor, 1);
 
-            glColor3f(0.5, 0.5, 0.5);
-            glBegin(GL_QUADS);
-                glVertex2f(width - width/3, height*2/3);
-                glVertex2f(width , height*2/3);
-                glVertex2f(width, 0);
-                glVertex2f(width - width/3, 0);
-            glEnd();
+        glClear(GL_DEPTH_BUFFER_BIT);
 
-            glMatrixMode(GL_PROJECTION);
+        glColor3f(1, 1, 1);
+        double text_height = scaleFactor * height / 20;
+        double text_padding = scaleFactor * (height / 2 - text_height * 9) / 8;
+
+        double padding = scaleFactor * min(width, height) / 100;
+        
+        double h = text_height;
+        // int w = width - width/3 + width/100;
+        double w = padding;
+        double tam = scaleFactor * 0.2;
+
+
+        TEXT::texto("Tecla UP - Flutuar.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla DOWN - Mergulhar.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla 8 - Rotacao anti-horária sobre X.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla 2 - Rotacao horaria sobre X.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla LEFT/A - Rotacao anti-horaria sobre Y.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla RIGHT/D - Rotacao horaria sobre Y.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla 4 - Rotacao anti-horaria sobre Z.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla 6 - Rotacao horaria sobre Z.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla F - Ponto de vista externo.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla I - Ponto de vista interno.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla H - Mostrar/Ocultar menu de ajuda.", w, h, tam, -tam);
+
+        glColor3f(0.5, 0.5, 0.5);
+        glBegin(GL_QUADS);
+        {
+            // glVertex2f(width - width/3, height*2/3);
+            // glVertex2f(width , height*2/3);
+            // glVertex2f(width, 0);
+            // glVertex2f(width - width/3, 0);
+            glVertex2f(0, 0.8 * max(width, height) * 2 / 3);
+            glVertex2f(0.9 * max(width, height) * 2 / 3, 0.8 * max(width, height) * 2 / 3);
+            glVertex2f(0.9 * max(width, height) * 2 / 3, 0);
+            glVertex2f(0, 0);
+        }
+        glEnd();
+
+        glMatrixMode(GL_PROJECTION);
 
         glPopMatrix();
         glMatrixMode(GL_MODELVIEW);
     }
 }
-
 
 #endif // HELP_CPP

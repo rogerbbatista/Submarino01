@@ -10,8 +10,6 @@ private:
     double u;
     double alpha_dot, beta_dot, psi_dot, flutuation_dot;
 
-    Matrix director;
-
     // virtual functions
     void beforeDraw();
     void afterDraw();
@@ -36,8 +34,6 @@ public:
     Submarine();
 
     void sendControlSignal(double u, double alpha_dot, double beta_dot, double psi_dot, double flutuation_dot);
-
-    const Matrix &getDirector() const;
 
     void rotateLeft();
     void rotateRight();

@@ -45,12 +45,14 @@ private:
 
     virtual void beforeDraw();
     virtual void afterDraw();
-
-    Matrix rotationMatrix;
-
+    
     double color_red, color_green, color_blue;
 
 protected:
+    Matrix rotationMatrix;
+    Matrix normalVector;
+    Matrix directionalVector;
+
     double x, y, z;
     double alpha, beta, psi;
 
@@ -72,6 +74,9 @@ public:
     void setColor(double red, double green, double blue);
     const Matrix dotRotation(const Matrix &other) const;
     void setStructure(double weight, double height, double depth);
+
+    const Matrix& getDirectional() const;
+    const Matrix& getNormal() const;
 
     double getX();
     double getY();

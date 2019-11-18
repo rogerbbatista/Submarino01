@@ -11,7 +11,7 @@ class Help{
     public:
         Help();
         void create();
-        void toogle();
+        void toggle();
         void draw();
 };
 

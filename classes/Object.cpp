@@ -14,7 +14,6 @@ using namespace std;
 #define DEBUG(x) std::cerr << #x << ": " << x << std::endl
 #endif
 
-
 void Face::reindex()
 {
     v1--;
@@ -50,6 +49,18 @@ Object::Object()
     depth = 0;
 
     rotationMatrix = GlobalConfig::getRotate(0, 0, 0);
+
+    normalVector = Matrix(4, 1);
+    normalVector[0][0] = 0;
+    normalVector[1][0] = 1;
+    normalVector[2][0] = 0;
+    normalVector[3][0] = 1;
+
+    directionalVector = Matrix(4, 1);
+    directionalVector[0][0] = 0;
+    directionalVector[1][0] = 0;
+    directionalVector[2][0] = -1;
+    directionalVector[3][0] = 1;
 }
 
 Object::Object(std::string name) : Object()
@@ -57,7 +68,6 @@ Object::Object(std::string name) : Object()
     std::ifstream file("models/" + name + ".obj");
     if (file.is_open())
     {
-
         std::string lines;
         // Chega até a lista de vértices
         file >> lines;
@@ -112,15 +122,13 @@ Object::Object(std::string name) : Object()
     }
     else
     {
-        printf(("Não é possível abrir: models/" + name + ".obj").c_str());
+        cerr << "Não é possível abrir: models/" + name + ".obj" << endl;
     }
 }
 
 void Object::draw()
 {
     glPushMatrix();
-    // glMatrixMode(GL_MODELVIEW);
-    // glLoadIdentity();
 
     beforeDraw();
 
@@ -136,6 +144,7 @@ void Object::draw()
     glEnd();
 
     afterDraw();
+    
     glPopMatrix();
 }
 
@@ -199,18 +208,16 @@ void Object::charge(std::string name)
     }
     else
     {
-        printf(("Não é possível abrir: models/" + name + ".obj").c_str());
+        cerr << "Não é possível abrir: models/" + name + ".obj" << endl;
     }
 }
 
-void Object::beforeDraw() {
-    glTranslatef(x, y, z);
-    glColor3f(color_red, color_green, color_blue);   
+void Object::beforeDraw()
+{
+    rePosition();
 }
 
-void Object::afterDraw() {
-    
-}
+void Object::afterDraw() {}
 
 double Object::getX()
 {
@@ -227,54 +234,28 @@ double Object::getZ()
     return z;
 }
 
-void Object::reCenter()
-{
-    double pi = GlobalConfig::pi();
-
-    // DEBUG(-psi * 180 / pi);
-    // DEBUG(-beta * 180 / pi);
-    // DEBUG(-alpha * 180 / pi);
-
-    // rotaciona para o centro
-    // glRotatef(-psi * 180 / pi, 0, 0, 1);
-    // glRotatef(-beta * 180 / pi, 0, 1, 0);
-    // glRotatef(-alpha * 180 / pi, 1, 0, 0);
-
-    // translada para (0,0,0)
-    // glTranslatef(-x, -y, -z);
-}
+void Object::reCenter() {}
 
 void Object::rePosition()
 {
     double pi = GlobalConfig::pi();
-    // fazendo ao contrario pelo opengl
 
-    // translada para (0,0,0)
+    // translada
     glTranslatef(x, y, z);
 
-    // DEBUG(x);
-    // DEBUG(y);
-    // DEBUG(z);
-    // DEBUG(alpha);
-    // DEBUG(beta);
-    // DEBUG(psi);
-    
     // rotaciona
     glRotatef(alpha * 180 / pi, 1, 0, 0);
     glRotatef(beta * 180 / pi, 0, 1, 0);
     glRotatef(psi * 180 / pi, 0, 0, 1);
-
-    // cerr << "o erro nao foi aq" << endl;
-
 }
 
 void Object::alignAngles()
 {
     double pi = GlobalConfig::pi();
 
-    if(abs(alpha) > pi)
+    if (abs(alpha) > pi)
     {
-        if(alpha < 0)
+        if (alpha < 0)
         {
             alpha += 2 * pi;
         }
@@ -284,9 +265,9 @@ void Object::alignAngles()
         }
     }
 
-    if(abs(beta) > pi)
+    if (abs(beta) > pi)
     {
-        if(beta < 0)
+        if (beta < 0)
         {
             beta += 2 * pi;
         }
@@ -296,9 +277,9 @@ void Object::alignAngles()
         }
     }
 
-    if(abs(psi) > pi)
+    if (abs(psi) > pi)
     {
-        if(psi < 0)
+        if (psi < 0)
         {
             psi += 2 * pi;
         }
@@ -307,8 +288,6 @@ void Object::alignAngles()
             psi -= 2 * pi;
         }
     }
-
-    
 }
 
 void Object::updateValues()
@@ -339,6 +318,16 @@ void Object::setStructure(double weight, double height, double depth)
     this->weight = weight;
     this->height = height;
     this->depth = depth;
+}
+
+const Matrix& Object::getDirectional() const
+{
+    return directionalVector;
+}
+
+const Matrix& Object::getNormal() const
+{
+    return normalVector;
 }
 
 #endif // OBJECT_CPP

@@ -25,19 +25,29 @@ void Submarine::KinematicModel()
 
     alignAngles();
 
-    Matrix R = GlobalConfig::getRotate(alpha, beta, psi);
+    // aplicar no vetor normal
+    Matrix R1 = GlobalConfig::getRotate(alpha, 0, psi);
 
-    updateRotation(d_alpha, d_beta, d_psi);
+    normalVector = Matrix(4, 1);
+    normalVector[0][0] = 0;
+    normalVector[1][0] = 1;
+    normalVector[2][0] = 0;
+    normalVector[3][0] = 1;
 
-    director = Matrix(4, 1);
-    director[0][0] = 0;
-    director[1][0] = 0;
-    director[2][0] = -1;
-    director[3][0] = 1;
+    normalVector = R1.dot(normalVector);
 
-    director = R.dot(director);
+    // aplicar no vetor direcional
+    Matrix R2 = GlobalConfig::getRotate(alpha, beta, 0);
 
-    Matrix d_u = director * u * dt;
+    directionalVector = Matrix(4, 1);
+    directionalVector[0][0] = 0;
+    directionalVector[1][0] = 0;
+    directionalVector[2][0] = -1;
+    directionalVector[3][0] = 1;
+
+    directionalVector = R2.dot(directionalVector);
+
+    Matrix d_u = directionalVector * u * dt;
 
     x += d_u[0][0];
     y += d_u[1][0] + d_flutuation;
@@ -50,34 +60,23 @@ void Submarine::beforeDraw()
 {
     KinematicModel();
 
-    // Open GL begin
-
-    // translada o objeto pra (0,0,0)
-    reCenter();
-
     // posiciona o objeto
     rePosition();
-
-    // Open GL end
 
     updateValues();
 }
 
-void Submarine::afterDraw()
-{
-
-    // cleanControlSignals();
-}
+void Submarine::afterDraw() { }
 
 Submarine::Submarine()
 {
     cleanControlSignals();
 
-    director = Matrix(4, 1);
-    director[0][0] = 0;
-    director[1][0] = 0;
-    director[2][0] = -1;
-    director[3][0] = 1;
+    directionalVector = Matrix(4, 1);
+    directionalVector[0][0] = 0;
+    directionalVector[1][0] = 0;
+    directionalVector[2][0] = -1;
+    directionalVector[3][0] = 1;
 }
 
 void Submarine::sendControlSignal(double u, double alpha_dot,
@@ -98,11 +97,6 @@ void Submarine::cleanControlSignals()
     beta_dot = 0;
     psi_dot = 0;
     flutuation_dot = 0;
-}
-
-const Matrix &Submarine::getDirector() const
-{
-    return director;
 }
 
 void Submarine::setLimits(double min_weight, double max_weight,
