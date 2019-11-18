@@ -161,4 +161,19 @@ const Matrix operator*(double value, Matrix &m)
     return m * value;
 }
 
+const Matrix Matrix::T()
+{
+    Matrix transposed(shape1, shape0);
+
+    for(int i = 0;  i < shape1; i++)
+    {
+        for(int j = 0; j < shape0; j++)
+        {
+            transposed[i][j] = this->m[j][i];
+        }
+    }
+
+    return transposed;
+}
+
 #endif //MATRIX_CPP

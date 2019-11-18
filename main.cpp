@@ -4,6 +4,7 @@
 #include "classes/Submarine.h"
 #include "classes/Ocean.h"
 #include "classes/Camera.h"
+#include "classes/GlobalConfig.h"
 #include <stdlib.h>
 
 Submarine sub;
@@ -85,35 +86,60 @@ void init(void)
     glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 200.0);
 
     sub.charge("submarine");
+    sub.setColor(0, 1, 0);
 
-    for (auto &a: astronaut) a.charge("astronauta");
+    for (auto &a: astronaut)
+    {
+        a.charge("astronauta");
+        a.setColor(GlobalConfig::getRandom(), GlobalConfig::getRandom(), GlobalConfig::getRandom());
+    }
     astronaut[0].setPosition(0,-35,-85);
     astronaut[1].setPosition(-55,-25,-55);
     astronaut[2].setPosition(0,-15,5);
     astronaut[3].setPosition(55,-20,85);
     astronaut[4].setPosition(75,-30,85);
 
-    for (auto &c: coral) c.charge("coral");
+    for (auto &c: coral)
+    {
+        c.charge("coral");
+        c.setColor(GlobalConfig::getRandom(), GlobalConfig::getRandom(), GlobalConfig::getRandom());
+    }
     coral[0].setPosition(-85,-20,-85);
     coral[1].setPosition(85,-20,-25);
     coral[2].setPosition(25,-20,55);
     coral[3].setPosition(-25,-20,55);
     coral[4].setPosition(-45,-20,85);
 
-    for (auto &h: horse) h.charge("horse");
+    for (auto &h: horse)
+    {
+        h.charge("horse");
+        h.setColor(GlobalConfig::getRandom(), GlobalConfig::getRandom(), GlobalConfig::getRandom());
+    }
     horse[0].setPosition(-5,-20,-25);
     horse[1].setPosition(-45,-15,35);
     horse[2].setPosition(85,-30,-75);
 
-    for (auto &o: old_ship) o.charge("old_ship");
+    for (auto &o: old_ship)
+    {
+        o.charge("old_ship");
+        o.setColor(GlobalConfig::getRandom(), GlobalConfig::getRandom(), GlobalConfig::getRandom());
+    }
     old_ship[0].setPosition(10,0,-10);
     old_ship[1].setPosition(0,0,90);
 
-    for (auto &r: rocks) r.charge("rocks");
+    for (auto &r: rocks)
+    {
+        r.charge("rocks");
+        r.setColor(GlobalConfig::getRandom(), GlobalConfig::getRandom(), GlobalConfig::getRandom());
+    }
     rocks[0].setPosition(-45,-20,-85);
     rocks[1].setPosition(85,-20,55);
 
-    for (auto &s: shark) s.charge("shark");
+    for (auto &s: shark)
+    {
+        s.charge("shark");
+        s.setColor(GlobalConfig::getRandom(), GlobalConfig::getRandom(), GlobalConfig::getRandom());
+    }
     shark[0].setPosition(-90,-50, 85);
     shark[1].setPosition(35, -70, -65);
     shark[2].setPosition(25, -30, 25);

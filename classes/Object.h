@@ -48,6 +48,8 @@ private:
 
     Matrix rotationMatrix;
 
+    double color_red, color_green, color_blue;
+
 protected:
     double x, y, z;
     double alpha, beta, psi;
@@ -67,6 +69,7 @@ public:
     void charge(std::string name);
     void setPosition(GLfloat x, GLfloat y, GLfloat z);
     void updateRotation(double d_alpha, double d_beta, double d_psi);
+    void setColor(double red, double green, double blue);
 
     double getX();
     double getY();

@@ -18,9 +18,14 @@ void Submarine::KinematicModel()
     d_beta = beta_dot * dt;
     d_psi = psi_dot * dt;
 
-    DEBUG(d_alpha);
-    DEBUG(d_beta);
-    DEBUG(d_psi);
+    alpha += d_alpha;
+    beta += d_beta;
+    psi += d_psi;
+
+    DEBUG(u);
+    DEBUG(alpha_dot);
+    DEBUG(beta_dot);
+    DEBUG(psi_dot);
 
     alignAngles();
 
@@ -46,9 +51,21 @@ void Submarine::KinematicModel()
     // DEBUG(director);
     // DEBUG(d_u);
 
-    n_x = x + d_u[0][0];
-    n_y = y + d_u[0][1];
-    n_z = z + d_u[0][2];
+    // cout << "----------" << endl;
+    // cout << director.T();
+    // cout << d_u.T();
+
+    // cout << x << " " << y << " " << z << endl;
+
+    // x = GlobalConfig::sum(x, d_u[0][0]);
+    // y = GlobalConfig::sum(y, d_u[1][0]);
+    // z = GlobalConfig::sum(z, d_u[2][0]);
+
+    x += d_u[0][0];
+    y += d_u[1][0];
+    z += d_u[2][0];
+
+    // cout << x << " " << y << " " << z << endl;
 }
 
 void Submarine::beforeDraw()
@@ -59,11 +76,9 @@ void Submarine::beforeDraw()
 
     // translada o objeto pra (0,0,0)
     reCenter();
-    
+
     // posiciona o objeto
     rePosition();
-    
-    glColor3f(0, 1, 0);
 
     // Open GL end
 
@@ -89,10 +104,10 @@ Submarine::Submarine()
 void Submarine::sendControlSignal(double u, double alpha_dot, double beta_dot, double psi_dot)
 {
     // Without inercia
-    this->u = u;
-    this->alpha_dot = alpha_dot;
-    this->beta_dot = beta_dot;
-    this->psi_dot = psi_dot;
+    this->u = (0.85 * this->u) + (0.15 * u);
+    this->alpha_dot = (0.85 * this->alpha_dot) + (0.15 * alpha_dot);
+    this->beta_dot = (0.85 * this->beta_dot) + (0.15 * beta_dot);
+    this->psi_dot = (0.85 * this->psi_dot) + (0.15 * psi_dot);
 }
 
 void Submarine::cleanControlSignals()

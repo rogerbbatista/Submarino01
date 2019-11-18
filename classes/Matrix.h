@@ -37,6 +37,8 @@ public:
     friend ostream& operator<< (ostream &out, const Matrix& m);
 
     friend const Matrix operator*(double value, Matrix &m);
+
+    const Matrix T();
 };
 
 #endif //MATRIX_H

@@ -21,16 +21,22 @@ void Camera::create()
 
 void Camera::update(Submarine &sub)
 {
+    Matrix dir = sub.getDirector();
+
     if (!inside)
     {
-        view = {(GLfloat)sub.getX(), (GLfloat)sub.getY() + 6, (GLfloat)sub.getZ() + 10};
+        // view = {(GLfloat)sub.getX(), (GLfloat)sub.getY() + 6, (GLfloat)sub.getZ() + 10};
+        view = {
+            (GLfloat)(sub.getX() - 10 * dir[0][0]),
+            (GLfloat)(sub.getY() - 10 * dir[1][0] + 6),
+            (GLfloat)(sub.getZ() - 10 * dir[2][0])};
+        
         look = {(GLfloat)sub.getX(), (GLfloat)sub.getY(), (GLfloat)sub.getZ()};
+
     }
     else
     {
         Matrix dir = sub.getDirector();
-
-        cout << dir[0][0] << " " << dir[0][1] << " " << dir[0][2] << endl;
 
         view = {
             (GLfloat)(sub.getX() + 5 * dir[0][0]),

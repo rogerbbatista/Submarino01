@@ -12,6 +12,8 @@ namespace GlobalConfig
     double pi();
 
     Matrix getRotate(double alpha, double beta, double psi);
+    double sum(double a, double b);
+    double getRandom();
 
 } // namespace GlobalConfig
 

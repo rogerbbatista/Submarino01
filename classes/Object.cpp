@@ -45,9 +45,9 @@ Object::Object()
     beta = 0;
     psi = 0;
 
-    n_x = 0;
-    n_y = 0;
-    n_z = 0;
+    // n_x = 0;
+    // n_y = 0;
+    // n_z = 0;
 
     d_alpha = 0;
     d_beta = 0;
@@ -128,6 +128,7 @@ void Object::draw()
 
     beforeDraw();
 
+    glColor3f(color_red, color_green, color_blue);
 
     glBegin(GL_TRIANGLES);
     for (auto &f : faces)
@@ -207,7 +208,8 @@ void Object::charge(std::string name)
 }
 
 void Object::beforeDraw() {
-    glTranslatef(x, y, z);    
+    glTranslatef(x, y, z);
+    glColor3f(color_red, color_green, color_blue);   
 }
 
 void Object::afterDraw() {
@@ -252,11 +254,14 @@ void Object::rePosition()
     // fazendo ao contrario pelo opengl
 
     // translada para (0,0,0)
-    glTranslatef(n_x, n_y, n_z);
+    glTranslatef(x, y, z);
 
-    DEBUG(alpha);
-    DEBUG(beta);
-    DEBUG(psi);
+    // DEBUG(x);
+    // DEBUG(y);
+    // DEBUG(z);
+    // DEBUG(alpha);
+    // DEBUG(beta);
+    // DEBUG(psi);
     
     // rotaciona
     glRotatef(alpha * 180 / pi, 1, 0, 0);
@@ -346,13 +351,13 @@ void Object::alignAngles()
 
 void Object::updateValues()
 {
-    x = n_x;
-    y = n_y;
-    z = n_z;
+    // x = n_x;
+    // y = n_y;
+    // z = n_z;
 
-    alpha += d_alpha;
-    beta += d_beta;
-    psi += d_psi;
+    // alpha += d_alpha;
+    // beta += d_beta;
+    // psi += d_psi;
 
     alignAngles();
 }
@@ -361,6 +366,13 @@ void Object::updateRotation(double d_alpha, double d_beta, double d_psi)
 {
     Matrix R = GlobalConfig::getRotate(d_alpha, d_beta, d_psi);
     rotationMatrix = R.dot(rotationMatrix);
+}
+
+void Object::setColor(double red, double green, double blue)
+{
+    color_red = red;
+    color_green = green;
+    color_blue = blue;
 }
 
 #endif // OBJECT_CPP
