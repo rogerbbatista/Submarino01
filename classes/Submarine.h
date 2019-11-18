@@ -14,9 +14,7 @@ private:
     void beforeDraw();
     void afterDraw();
 
-    // non virtual functions
     void cleanControlSignals();
-
     void KinematicModel();
 
     // limits
@@ -34,15 +32,6 @@ public:
     Submarine();
 
     void sendControlSignal(double u, double alpha_dot, double beta_dot, double psi_dot, double flutuation_dot);
-
-    void rotateLeft();
-    void rotateRight();
-
-    void walkFront();
-    void walkBack();
-
-    void up();
-    void down();
 
     void setLimits(double min_weight, double max_weight,
                    double min_height, double max_height,
