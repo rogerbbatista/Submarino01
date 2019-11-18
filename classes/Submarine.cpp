@@ -25,9 +25,7 @@ void Submarine::KinematicModel()
 
     alignAngles();
 
-    Matrix R1 = GlobalConfig::getRotate(alpha, beta, psi);
-    Matrix R2 = GlobalConfig::getRotate(d_alpha, d_beta, d_psi);
-    Matrix R = R2.dot(R1);
+    Matrix R = GlobalConfig::getRotate(alpha, beta, psi);
 
     updateRotation(d_alpha, d_beta, d_psi);
 
