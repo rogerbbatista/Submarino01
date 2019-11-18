@@ -10,6 +10,7 @@ namespace GlobalConfig
     // tempo de amostragem
     double dt();
     double pi();
+    int tempoAmostragem();
 
     Matrix getRotate(double alpha, double beta, double psi);
     double sum(double a, double b);

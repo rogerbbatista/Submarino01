@@ -57,6 +57,9 @@ protected:
     double n_x, n_y, n_z;
     double d_alpha, d_beta, d_psi;
 
+    // structure
+    double weight, height, depth;
+    
     void reCenter();
     void rePosition();
     void alignAngles();
@@ -70,6 +73,8 @@ public:
     void setPosition(GLfloat x, GLfloat y, GLfloat z);
     void updateRotation(double d_alpha, double d_beta, double d_psi);
     void setColor(double red, double green, double blue);
+    const Matrix dotRotation(const Matrix &other) const;
+    void setStructure(double weight, double height, double depth);
 
     double getX();
     double getY();

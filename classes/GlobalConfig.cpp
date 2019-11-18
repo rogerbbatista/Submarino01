@@ -10,6 +10,7 @@
 
 double GlobalConfig::dt() { return 0.1; }
 double GlobalConfig::pi() { return M_PI; }
+int GlobalConfig::tempoAmostragem() { return 100; }
 
 Matrix GlobalConfig::getRotate(double alpha, double beta, double psi)
 {

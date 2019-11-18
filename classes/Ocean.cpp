@@ -32,10 +32,11 @@ void Ocean::draw_face(int a, int b, int c, int d)
     glEnd();
 }
 
-void Ocean::create(int tam)
+void Ocean::create(double tamanho)
 {
+    GLfloat tam = (GLfloat)tamanho;
     color_water = {0.0, 0.0, 1.0, 0.8};
-    color_ground = {0.07, 0.57, 0.21, 1.0};
+    color_ground = {0.5, 0.5, 0.5, 1.0};
     vertices = {
         {-tam, 0, tam},
         {tam, 0, tam},

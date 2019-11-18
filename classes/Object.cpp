@@ -53,6 +53,10 @@ Object::Object()
     d_beta = 0;
     d_psi = 0;
 
+    weight = 0;
+    height = 0;
+    depth = 0;
+
     rotationMatrix = GlobalConfig::getRotate(0, 0, 0);
 }
 
@@ -128,7 +132,7 @@ void Object::draw()
 
     beforeDraw();
 
-    glColor3f(color_red, color_green, color_blue);
+    glColor4f(color_red, color_green, color_blue, 0.9);
 
     glBegin(GL_TRIANGLES);
     for (auto &f : faces)
@@ -368,11 +372,23 @@ void Object::updateRotation(double d_alpha, double d_beta, double d_psi)
     rotationMatrix = R.dot(rotationMatrix);
 }
 
+const Matrix Object::dotRotation(const Matrix &other) const
+{
+    return rotationMatrix.dot(other);
+}
+
 void Object::setColor(double red, double green, double blue)
 {
     color_red = red;
     color_green = green;
     color_blue = blue;
+}
+
+void Object::setStructure(double weight, double height, double depth)
+{
+    this->weight = weight;
+    this->height = height;
+    this->depth = depth;
 }
 
 #endif // OBJECT_CPP
