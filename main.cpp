@@ -257,7 +257,6 @@ void display(void)
 void mainLoop(int key)
 {
     double u = 0, alpha_dot = 0, beta_dot = 0, psi_dot = 0, flutuation_dot = 0;
-    bool hp = false;
 
     if (keyboard.w)
         u += 5;
@@ -289,8 +288,7 @@ void mainLoop(int key)
     if (keyboard.i)
         cam.change_view(true);
 
-    if (keyboard.h)
-        help.toggle();
+    help.change(keyboard.h);
 
     sub.sendControlSignal(u, alpha_dot, beta_dot, psi_dot, flutuation_dot);
 

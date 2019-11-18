@@ -15,11 +15,7 @@ Help::Help() {}
 void Help::create()
 {
     toogled = true;
-}
-
-void Help::toggle()
-{
-    toogled = !toogled;
+    last = false;
 }
 
 void Help::draw()
@@ -99,6 +95,15 @@ void Help::draw()
         glPopMatrix();
         glMatrixMode(GL_MODELVIEW);
     }
+}
+
+void Help::change(bool input)
+{
+    if(last != input)
+    {
+        toogled = !(toogled ^ input);
+    }
+    last = input;
 }
 
 #endif // HELP_CPP

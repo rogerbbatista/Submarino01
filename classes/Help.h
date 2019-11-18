@@ -8,11 +8,12 @@
 class Help{
     private:
         bool toogled;
+        bool last;
     public:
         Help();
         void create();
-        void toggle();
         void draw();
+        void change(bool input);
 };
 
 #endif // HELP_H
