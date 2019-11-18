@@ -54,9 +54,6 @@ protected:
     double x, y, z;
     double alpha, beta, psi;
 
-    double n_x, n_y, n_z;
-    double d_alpha, d_beta, d_psi;
-
     // structure
     double weight, height, depth;
     

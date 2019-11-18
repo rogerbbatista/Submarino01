@@ -17,11 +17,13 @@ struct Keyboard
     bool f, i;
     bool h;
     bool up, down, left, right;
+    bool np_up, np_down, np_left, np_right;
 
     Keyboard()
     {
         w = s = a = d = f = i = h = false;
         up = down = left = right = false;
+        np_up = np_down = np_left = np_right = false;
     }
 };
 
@@ -78,31 +80,65 @@ void handle(unsigned char key, int mousex, int mousey)
     case 'W':
     case 'w':
     {
-        // sub.walkFront();
         keyboard.w = !keyboard.w;
         break;
     }
     case 'S':
     case 's':
     {
-        // sub.walkBack();
         keyboard.s = !keyboard.s;
+        break;
+    }
+    case 'A':
+    case 'a':
+    {
+        keyboard.a = !keyboard.a;
+        break;
+    }
+    case 'D':
+    case 'd':
+    {
+        keyboard.d = !keyboard.d;
         break;
     }
     case 'F':
     case 'f':
-        // cam.change_view(false);
+    {
         keyboard.f = !keyboard.f;
         break;
+    }
     case 'I':
     case 'i':
-        // cam.change_view(true);
+    {
         keyboard.i = !keyboard.i;
         break;
+    }
     case 'H':
     case 'h':
+    {
         keyboard.h = !keyboard.h;
         break;
+    }
+    case '8':
+    {
+        keyboard.np_up = !keyboard.np_up;
+        break;
+    }
+    case '2':
+    {
+        keyboard.np_down = !keyboard.np_down;
+        break;
+    }
+    case '4':
+    {
+        keyboard.np_left = !keyboard.np_left;
+        break;
+    }
+    case '6':
+    {
+        keyboard.np_right = !keyboard.np_right;
+        break;
+    }
     }
 }
 
@@ -117,7 +153,7 @@ void init(void)
     sub.charge("submarine");
     sub.setColor(0, 1, 0);
     sub.setStructure(5, 5, 8);
-    sub.setLimits(-150, 150, -200, 5, -150, 150);
+    sub.setLimits(-150, 150, -200, 2, -150, 150);
     sub.setAngleLimits(-pi / 6, pi / 6, -pi, pi, -pi / 6, pi / 6);
 
     for (auto &a : astronaut)
@@ -215,7 +251,7 @@ void display(void)
 
 void mainLoop(int key)
 {
-    double u = 0, alpha_dot = 0, beta_dot = 0, psi_dot = 0;
+    double u = 0, alpha_dot = 0, beta_dot = 0, psi_dot = 0, flutuation_dot = 0;
 
     if (keyboard.w)
         u += 5;
@@ -223,13 +259,23 @@ void mainLoop(int key)
         u -= 5;
 
     if (keyboard.up)
-        alpha_dot += 1;
+        flutuation_dot += 1;
     if (keyboard.down)
+        flutuation_dot -= 1;
+
+    if (keyboard.np_up)
+        alpha_dot += 1;
+    if (keyboard.np_down)
         alpha_dot -= 1;
 
-    if (keyboard.left)
+    if (keyboard.np_left)
+        psi_dot += 1;
+    if (keyboard.np_right)
+        psi_dot -= 1;
+
+    if (keyboard.left || keyboard.a)
         beta_dot += 1;
-    if (keyboard.right)
+    if (keyboard.right || keyboard.d)
         beta_dot -= 1;
 
     if (keyboard.f)
@@ -237,12 +283,7 @@ void mainLoop(int key)
     if (keyboard.i)
         cam.change_view(true);
 
-    // DEBUG(u);
-    // DEBUG(alpha_dot);
-    // DEBUG(beta_dot);
-    // DEBUG(psi_dot);
-
-    sub.sendControlSignal(u, alpha_dot, beta_dot, psi_dot);
+    sub.sendControlSignal(u, alpha_dot, beta_dot, psi_dot, flutuation_dot);
 
     glutPostRedisplay();
 

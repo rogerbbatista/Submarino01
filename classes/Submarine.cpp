@@ -14,18 +14,14 @@ void Submarine::KinematicModel()
     double dt = GlobalConfig::dt();
     double pi = GlobalConfig::pi();
 
-    d_alpha = alpha_dot * dt;
-    d_beta = beta_dot * dt;
-    d_psi = psi_dot * dt;
+    double d_alpha = alpha_dot * dt;
+    double d_beta = beta_dot * dt;
+    double d_psi = psi_dot * dt;
+    double d_flutuation = flutuation_dot * dt;
 
     alpha += d_alpha;
     beta += d_beta;
     psi += d_psi;
-
-    // DEBUG(u);
-    // DEBUG(alpha_dot);
-    // DEBUG(beta_dot);
-    // DEBUG(psi_dot);
 
     alignAngles();
 
@@ -41,44 +37,15 @@ void Submarine::KinematicModel()
     director[2][0] = -1;
     director[3][0] = 1;
 
-    // director = dotRotation(director);
     director = R.dot(director);
 
     Matrix d_u = director * u * dt;
 
-    // alpha = atan2(director[2][0], director[1][0]);
-    // beta = atan2(director[0][0], director[2][0]);
-    // psi = atan2(director[1][0], director[0][0]);
-
-    // DEBUG(n_x);
-    // DEBUG(n_y);
-    // DEBUG(n_z);
-    // DEBUG(d_u);
-
-    // DEBUG(director);
-    // DEBUG(d_u);
-
-    // cout << "----------" << endl;
-    // cout << director.T();
-    // cout << d_u.T();
-
-    // cout << x << " " << y << " " << z << endl;
-
-    // x = GlobalConfig::sum(x, d_u[0][0]);
-    // y = GlobalConfig::sum(y, d_u[1][0]);
-    // z = GlobalConfig::sum(z, d_u[2][0]);
-
     x += d_u[0][0];
-    y += d_u[1][0];
+    y += d_u[1][0] + d_flutuation;
     z += d_u[2][0];
 
-    cout << "---------------" << endl;
-
-    cout << x << " " << y << " " << z << endl;
-
     correctPosition();
-    
-    cout << x << " " << y << " " << z << endl;
 }
 
 void Submarine::beforeDraw()
@@ -115,23 +82,15 @@ Submarine::Submarine()
     director[3][0] = 1;
 }
 
-void Submarine::sendControlSignal(double u, double alpha_dot, double beta_dot, double psi_dot)
+void Submarine::sendControlSignal(double u, double alpha_dot,
+                                  double beta_dot, double psi_dot, double flutuation_dot)
 {
-    // DEBUG(u);
-    // DEBUG(alpha_dot);
-    // DEBUG(beta_dot);
-    // DEBUG(psi_dot);
-
     // With inercia
-    this->u = (0.85 * this->u) + (0.15 * u);
-    this->alpha_dot = (0.85 * this->alpha_dot) + (0.15 * alpha_dot);
-    this->beta_dot = (0.85 * this->beta_dot) + (0.15 * beta_dot);
-    this->psi_dot = (0.85 * this->psi_dot) + (0.15 * psi_dot);
-
-    // DEBUG(this->u);
-    // DEBUG(this->alpha_dot);
-    // DEBUG(this->beta_dot);
-    // DEBUG(this->psi_dot);
+    this->u = (0.9 * this->u) + (0.1 * u);
+    this->alpha_dot = (0.9 * this->alpha_dot) + (0.1 * alpha_dot);
+    this->beta_dot = (0.9 * this->beta_dot) + (0.1 * beta_dot);
+    this->psi_dot = (0.9 * this->psi_dot) + (0.1 * psi_dot);
+    this->flutuation_dot = (0.9 * this->flutuation_dot) + (0.1 * flutuation_dot);
 }
 
 void Submarine::cleanControlSignals()
@@ -140,41 +99,12 @@ void Submarine::cleanControlSignals()
     alpha_dot = 0;
     beta_dot = 0;
     psi_dot = 0;
+    flutuation_dot = 0;
 }
 
 const Matrix &Submarine::getDirector() const
 {
     return director;
-}
-
-void Submarine::rotateLeft()
-{
-    sendControlSignal(0, 0, 1, 0);
-}
-
-void Submarine::rotateRight()
-{
-    sendControlSignal(0, 0, -1, 0);
-}
-
-void Submarine::walkFront()
-{
-    sendControlSignal(1, 0, 0, 0);
-}
-
-void Submarine::walkBack()
-{
-    sendControlSignal(-1, 0, 0, 0);
-}
-
-void Submarine::up()
-{
-    sendControlSignal(0, 1, 0, 0);
-}
-
-void Submarine::down()
-{
-    sendControlSignal(0, -1, 0, 0);
 }
 
 void Submarine::setLimits(double min_weight, double max_weight,
@@ -192,8 +122,8 @@ void Submarine::setLimits(double min_weight, double max_weight,
 }
 
 void Submarine::setAngleLimits(double min_alpha, double max_alpha,
-                          double min_beta, double max_beta,
-                          double min_psi, double max_psi)
+                               double min_beta, double max_beta,
+                               double min_psi, double max_psi)
 {
     this->min_alpha = min_alpha;
     this->max_alpha = max_alpha;
@@ -207,23 +137,35 @@ void Submarine::setAngleLimits(double min_alpha, double max_alpha,
 
 void Submarine::correctPosition()
 {
-    if(x < min_weight + (weight / 2)) x = min_weight + (weight / 2);
-    if(x > max_weight - (weight / 2)) x = max_weight - (weight / 2);
+    if (x < min_weight + (weight / 2))
+        x = min_weight + (weight / 2);
+    if (x > max_weight - (weight / 2))
+        x = max_weight - (weight / 2);
 
-    if(y < min_height + (height / 2)) y = min_height + (height / 2);
-    if(y > max_height - (height / 2)) y = max_height - (height / 2);
+    if (y < min_height + (height / 2))
+        y = min_height + (height / 2);
+    if (y > max_height - (height / 2))
+        y = max_height - (height / 2);
 
-    if(z < min_depth + (depth / 2)) z = min_depth + (depth / 2);
-    if(z > max_depth - (depth / 2)) z = max_depth - (depth / 2);
+    if (z < min_depth + (depth / 2))
+        z = min_depth + (depth / 2);
+    if (z > max_depth - (depth / 2))
+        z = max_depth - (depth / 2);
 
-    if(alpha < min_alpha) alpha = min_alpha;
-    if(alpha > max_alpha) alpha = max_alpha;
+    if (alpha < min_alpha)
+        alpha = min_alpha;
+    if (alpha > max_alpha)
+        alpha = max_alpha;
 
-    if(beta < min_beta) beta = min_beta;
-    if(beta > max_beta) beta = max_beta;
+    if (beta < min_beta)
+        beta = min_beta;
+    if (beta > max_beta)
+        beta = max_beta;
 
-    if(psi < min_psi) psi = min_psi;
-    if(psi > max_psi) psi = max_psi;
+    if (psi < min_psi)
+        psi = min_psi;
+    if (psi > max_psi)
+        psi = max_psi;
 }
 
 #endif // SUBMARINE_CPP

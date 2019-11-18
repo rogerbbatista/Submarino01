@@ -45,14 +45,6 @@ Object::Object()
     beta = 0;
     psi = 0;
 
-    // n_x = 0;
-    // n_y = 0;
-    // n_z = 0;
-
-    d_alpha = 0;
-    d_beta = 0;
-    d_psi = 0;
-
     weight = 0;
     height = 0;
     depth = 0;
@@ -316,53 +308,11 @@ void Object::alignAngles()
         }
     }
 
-    if(abs(d_alpha) > pi)
-    {
-        if(d_alpha < 0)
-        {
-            d_alpha += 2 * pi;
-        }
-        else
-        {
-            d_alpha -= 2 * pi;
-        }
-    }
-
-    if(abs(d_beta) > pi)
-    {
-        if(d_beta < 0)
-        {
-            d_beta += 2 * pi;
-        }
-        else
-        {
-            d_beta -= 2 * pi;
-        }
-    }
-
-    if(abs(d_psi) > pi)
-    {
-        if(d_psi < 0)
-        {
-            d_psi += 2 * pi;
-        }
-        else
-        {
-            d_psi -= 2 * pi;
-        }
-    }
+    
 }
 
 void Object::updateValues()
 {
-    // x = n_x;
-    // y = n_y;
-    // z = n_z;
-
-    // alpha += d_alpha;
-    // beta += d_beta;
-    // psi += d_psi;
-
     alignAngles();
 }
 

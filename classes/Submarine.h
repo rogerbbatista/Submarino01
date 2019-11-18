@@ -8,7 +8,7 @@ class Submarine : public Object
 {
 private:
     double u;
-    double alpha_dot, beta_dot, psi_dot;
+    double alpha_dot, beta_dot, psi_dot, flutuation_dot;
 
     Matrix director;
 
@@ -35,7 +35,7 @@ private:
 public:
     Submarine();
 
-    void sendControlSignal(double u, double alpha_dot, double beta_dot, double psi_dot);
+    void sendControlSignal(double u, double alpha_dot, double beta_dot, double psi_dot, double flutuation_dot);
 
     const Matrix &getDirector() const;
 
