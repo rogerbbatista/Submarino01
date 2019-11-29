@@ -22,6 +22,7 @@
 - Duvidas gerais
     - https://www.youtube.com/watch?v=P6pJHrA9Avs
     - https://stackoverflow.com/questions/2571402/how-to-use-glortho-in-opengl
+    - https://stackoverflow.com/questions/17725670/why-does-gl-shininess-have-a-maximum-value-of-128-0-instead-of-1-0
 
 - Este link foi consultado para a construção do menu de ajuda. O código altera a projeção dentro de pushMatrix e popMatrix para utilizar coordenadas 2D e depois retorna para a configuração normal para desenhar os objetiso 3D.
     - https://stackoverflow.com/questions/5467218/opengl-2d-hud-over-3d

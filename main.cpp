@@ -5,6 +5,7 @@
 #include "classes/Ocean.h"
 #include "classes/Camera.h"
 #include "classes/Help.h"
+#include "classes/Lights.h"
 #include "classes/GlobalConfig.h"
 #include <stdlib.h>
 
@@ -17,11 +18,15 @@ struct Keyboard
     bool w, s, a, d;
     bool f, i;
     bool h;
+    bool g, l;
+    bool p, o;
     bool up, down, left, right;
     bool np_up, np_down, np_left, np_right;
 
     Keyboard()
     {
+        g = l = true;
+        p = o = true;
         w = s = a = d = f = i = h = false;
         up = down = left = right = false;
         np_up = np_down = np_left = np_right = false;
@@ -40,6 +45,7 @@ Object shark[3];
 
 Ocean ocean;
 Camera cam;
+Lights lights;
 Help help;
 
 const double pi = M_PI;
@@ -119,6 +125,30 @@ void handle(unsigned char key, int mousex, int mousey)
     case 'h':
     {
         keyboard.h = !keyboard.h;
+        break;
+    }
+    case 'L':
+    case 'l':
+    {
+        keyboard.l = !keyboard.l;
+        break;
+    }
+    case 'G':
+    case 'g':
+    {
+        keyboard.g = !keyboard.g;
+        break;
+    }
+    case 'P':
+    case 'p':
+    {
+        keyboard.p = !keyboard.p;
+        break;
+    }
+    case 'O':
+    case 'o':
+    {
+        keyboard.o = !keyboard.o;
         break;
     }
     case '8':
@@ -217,6 +247,7 @@ void init(void)
     ocean.create(200);
     cam.create();
     help.create();
+    lights.create();
 
     glMatrixMode(GL_MODELVIEW);
 }
@@ -289,6 +320,9 @@ void mainLoop(int key)
         cam.change_view(true);
 
     help.change(keyboard.h);
+    lights.turn(keyboard.o, 0);
+    lights.turn(keyboard.p, 1);
+    lights.change(keyboard.g);
 
     sub.sendControlSignal(u, alpha_dot, beta_dot, psi_dot, flutuation_dot);
 

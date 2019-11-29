@@ -75,6 +75,15 @@ void Help::draw()
         TEXT::texto("Tecla I - Ponto de vista interno.", w, h, tam, -tam);
         h += text_height + text_padding;
         TEXT::texto("Tecla H - Mostrar/Ocultar menu de ajuda.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla L - Habilita/Desabilita iluminação.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla G - Alterna entre shading Flat/Gouraud.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla P - Habilita/Desabilita Luz 1.", w, h, tam, -tam);
+        h += text_height + text_padding;
+        TEXT::texto("Tecla O - Habilita/Desabilita Luz 2.", w, h, tam, -tam);
+        h += text_height + text_padding;
 
         glColor3f(0.5, 0.5, 0.5);
         glBegin(GL_QUADS);

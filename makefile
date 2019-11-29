@@ -1,4 +1,4 @@
-all: obj/Object.o obj/main.o obj/Ocean.o obj/Submarine.o obj/GlobalConfig.o obj/Camera.o obj/Help.o obj/Text.o obj/Matrix.o
+all: obj/Object.o obj/main.o obj/Ocean.o obj/Submarine.o obj/GlobalConfig.o obj/Camera.o obj/Help.o obj/Text.o obj/Lights.o obj/Matrix.o
 	g++ obj/*.o -lglut -lGLU -lGL -o main.out
 
 obj/Text.o: classes/Text.h classes/Text.cpp
@@ -6,6 +6,9 @@ obj/Text.o: classes/Text.h classes/Text.cpp
 
 obj/Help.o: classes/Help.h classes/Help.cpp
 	g++ -c classes/Help.cpp -o obj/Help.o
+
+obj/Lights.o: classes/Lights.h classes/Lights.cpp
+	g++ -c classes/Lights.cpp -o obj/Lights.o
 
 obj/Camera.o: classes/Camera.h classes/Camera.cpp
 	g++ -c classes/Camera.cpp -o obj/Camera.o
