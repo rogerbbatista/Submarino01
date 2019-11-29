@@ -5,13 +5,12 @@
 
 #include "Matrix.h"
 
-namespace GlobalConfig
+namespace GConf
 {
     // tempo de amostragem
-    double dt();
-    int tempoAmostragem();
-    
-    double pi();
+    extern const double dt;
+    extern const int tempoAmostragem;
+    extern const double pi;
 
     Matrix getRotate(double alpha, double beta, double psi);
     double sum(double a, double b);

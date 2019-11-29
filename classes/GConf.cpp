@@ -2,17 +2,17 @@
 #define GLOBAL_CONFIG_CPP
 
 #include <bits/stdc++.h>
-#include "GlobalConfig.h"
+#include "GConf.h"
 
 #ifndef DEBUG
 #define DEBUG(x) cerr << #x << ": " << x << " "
 #endif
 
-double GlobalConfig::dt() { return 0.1; }
-double GlobalConfig::pi() { return M_PI; }
-int GlobalConfig::tempoAmostragem() { return 100; }
+const int GConf::tempoAmostragem = 100;
+const double GConf::dt = 0.1;
+const double GConf::pi = M_PI;
 
-Matrix GlobalConfig::getRotate(double alpha, double beta, double psi)
+Matrix GConf::getRotate(double alpha, double beta, double psi)
 {
     double c, s;
 
@@ -45,7 +45,7 @@ Matrix GlobalConfig::getRotate(double alpha, double beta, double psi)
     return R;
 }
 
-double GlobalConfig::sum(double a, double b)
+double GConf::sum(double a, double b)
 {
     int precision = 1000;
 
@@ -75,7 +75,7 @@ double GlobalConfig::sum(double a, double b)
     return s;
 }
 
-double GlobalConfig::getRandom()
+double GConf::getRandom()
 {
     static std::random_device rd;
     static std::mt19937 g(rd());

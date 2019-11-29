@@ -5,6 +5,10 @@
 #include <GL/glut.h>
 
 class Lights{
+    private:
+        bool on;
+        bool smoth;
+        
     public:
         void create();
         void enable(bool on);

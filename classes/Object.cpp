@@ -6,7 +6,7 @@
 #include <bits/stdc++.h>
 
 #include "Object.h"
-#include "GlobalConfig.h"
+#include "GConf.h"
 
 using namespace std;
 
@@ -48,7 +48,7 @@ Object::Object()
     height = 0;
     depth = 0;
 
-    rotationMatrix = GlobalConfig::getRotate(0, 0, 0);
+    rotationMatrix = GConf::getRotate(0, 0, 0);
 
     normalVector = Matrix(4, 1);
     normalVector[0][0] = 0;
@@ -238,7 +238,7 @@ void Object::reCenter() {}
 
 void Object::rePosition()
 {
-    double pi = GlobalConfig::pi();
+    double pi = GConf::pi;
 
     // translada
     glTranslatef(x, y, z);
@@ -251,7 +251,7 @@ void Object::rePosition()
 
 void Object::alignAngles()
 {
-    double pi = GlobalConfig::pi();
+    double pi = GConf::pi;
 
     if (abs(alpha) > pi)
     {
@@ -297,7 +297,7 @@ void Object::updateValues()
 
 void Object::updateRotation(double d_alpha, double d_beta, double d_psi)
 {
-    Matrix R = GlobalConfig::getRotate(d_alpha, d_beta, d_psi);
+    Matrix R = GConf::getRotate(d_alpha, d_beta, d_psi);
     rotationMatrix = R.dot(rotationMatrix);
 }
 

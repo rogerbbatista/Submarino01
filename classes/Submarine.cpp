@@ -6,13 +6,13 @@
 #endif
 
 #include "Submarine.h"
-#include "GlobalConfig.h"
+#include "GConf.h"
 #include "Matrix.h"
 
 void Submarine::KinematicModel()
 {
-    double dt = GlobalConfig::dt();
-    double pi = GlobalConfig::pi();
+    double dt = GConf::dt;
+    double pi = GConf::pi;
 
     double d_alpha = alpha_dot * dt;
     double d_beta = beta_dot * dt;
@@ -26,7 +26,7 @@ void Submarine::KinematicModel()
     alignAngles();
 
     // aplicar no vetor normal
-    Matrix R1 = GlobalConfig::getRotate(0, 0, psi);
+    Matrix R1 = GConf::getRotate(0, 0, psi);
 
     normalVector = Matrix(4, 1);
     normalVector[0][0] = 0;
@@ -37,7 +37,7 @@ void Submarine::KinematicModel()
     normalVector = R1.dot(normalVector);
 
     // aplicar no vetor direcional
-    Matrix R2 = GlobalConfig::getRotate(alpha, beta, 0);
+    Matrix R2 = GConf::getRotate(alpha, beta, 0);
 
     directionalVector = Matrix(4, 1);
     directionalVector[0][0] = 0;

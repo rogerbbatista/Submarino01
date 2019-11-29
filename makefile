@@ -1,4 +1,4 @@
-all: obj/Object.o obj/main.o obj/Ocean.o obj/Submarine.o obj/GlobalConfig.o obj/Camera.o obj/Help.o obj/Text.o obj/Lights.o obj/Matrix.o
+all: obj/Object.o obj/main.o obj/Ocean.o obj/Submarine.o obj/GConf.o obj/Camera.o obj/Help.o obj/Text.o obj/Lights.o obj/Matrix.o obj/display.o obj/handle.o  obj/init.o obj/mainLoop.o
 	g++ obj/*.o -lglut -lGLU -lGL -o main.out
 
 obj/Text.o: classes/Text.h classes/Text.cpp
@@ -22,11 +22,23 @@ obj/Ocean.o: classes/Ocean.h classes/Ocean.cpp
 obj/Submarine.o: classes/Submarine.h classes/Submarine.cpp
 	g++ -c classes/Submarine.cpp -o obj/Submarine.o
 
-obj/GlobalConfig.o: classes/GlobalConfig.h classes/GlobalConfig.cpp
-	g++ -c classes/GlobalConfig.cpp -o obj/GlobalConfig.o
+obj/GConf.o: classes/GConf.h classes/GConf.cpp
+	g++ -c classes/GConf.cpp -o obj/GConf.o
 
 obj/Matrix.o: classes/Matrix.h classes/Matrix.cpp
 	g++ -c classes/Matrix.cpp -o obj/Matrix.o
+
+obj/display.o: openGL/Functions.h openGL/display.cpp
+	g++ -c openGL/display.cpp  -o obj/display.o
+
+obj/handle.o: openGL/Functions.h openGL/handle.cpp
+	g++ -c openGL/handle.cpp  -o obj/handle.o
+
+obj/init.o: openGL/Functions.h openGL/init.cpp
+	g++ -c openGL/init.cpp  -o obj/init.o
+
+obj/mainLoop.o: openGL/Functions.h openGL/mainLoop.cpp 
+	g++ -c openGL/mainLoop.cpp  -o obj/mainLoop.o
 
 obj/main.o: main.cpp
 	g++ -c main.cpp -o obj/main.o
