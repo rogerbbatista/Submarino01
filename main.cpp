@@ -29,8 +29,12 @@ Object shark[3];
 
 Ocean ocean;
 Camera cam;
-Lights lights;
 Help help;
+
+//lights
+Lights lights;
+Light sun(3);
+SpotLight submarine_beacon(4);
 
 const double pi = M_PI;
 

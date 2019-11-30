@@ -6,6 +6,7 @@
 #include "../classes/Ocean.h"
 #include "../classes/Camera.h"
 #include "../classes/Lights.h"
+#include "../classes/Light.h"
 #include "../classes/Help.h"
 
 extern Submarine sub;
@@ -20,5 +21,8 @@ extern Ocean ocean;
 extern Camera cam;
 extern Lights lights;
 extern Help help;
+
+extern SpotLight submarine_beacon;
+extern Light sun;
 
 #endif // OPENGL_OBJ_H
