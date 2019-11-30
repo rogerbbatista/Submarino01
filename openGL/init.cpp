@@ -74,8 +74,18 @@ void init(void)
 
     ocean.create(200);
     cam.create();
+    // lights.create();
+
+    glEnable(GL_LIGHTING);
+    submarine_beacon.setPosition({0, 250, 0, 1});
+    submarine_beacon.setDirection({0, -1, 0, 1});
+    submarine_beacon.setType(GL_SPECULAR);
+    submarine_beacon.setColor({1, 1, 0, 1});
+    submarine_beacon.setAngle(15);
+    submarine_beacon.setExponent(64);
+    submarine_beacon.create();
+
     help.create();
-    lights.create();
 
     glMatrixMode(GL_MODELVIEW);
 }

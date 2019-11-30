@@ -31,6 +31,8 @@ void Help::draw()
         glLoadIdentity();
         glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
 
+        glDisable(GL_LIGHTING);
+
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
@@ -98,6 +100,8 @@ void Help::draw()
             glVertex2f(0, 0);
         }
         glEnd();
+
+        glEnable(GL_LIGHTING);
 
         glMatrixMode(GL_PROJECTION);
 
