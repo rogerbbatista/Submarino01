@@ -79,18 +79,18 @@ void Object::draw()
     glBegin(GL_TRIANGLES);
     for (auto &f : faces)
     {
-        Material m = materials[f.m];
-        if (m.ilu != 0){
-            if (m.ilu == 2){
-                glMaterialfv(GL_FRONT, GL_SPECULAR, m.spe);
-                glMaterialfv(GL_FRONT, GL_EMISSION, m.ems);
-            }else{
-                glMaterialfv(GL_FRONT, GL_SPECULAR, black);
-            }
-            glMaterialfv(GL_FRONT, GL_AMBIENT, m.amb);
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, m.dif);
-        }
-        glMaterialf(GL_FRONT, GL_SHININESS, m.shi);
+        // Material m = materials[f.m];
+        // if (m.ilu != 0){
+        //     if (m.ilu == 2){
+        //         glMaterialfv(GL_FRONT, GL_SPECULAR, m.spe);
+        //         glMaterialfv(GL_FRONT, GL_EMISSION, m.ems);
+        //     }else{
+        //         glMaterialfv(GL_FRONT, GL_SPECULAR, black);
+        //     }
+        //     glMaterialfv(GL_FRONT, GL_AMBIENT, m.amb);
+        //     glMaterialfv(GL_FRONT, GL_DIFFUSE, m.dif);
+        // }
+        // glMaterialf(GL_FRONT, GL_SHININESS, m.shi);
 
         if (normals.size()) glNormal3f(normals[f.n1].x, normals[f.n1].y, normals[f.n1].z);
         if (textures.size()) glTexCoord2f(textures[f.t1].t1, textures[f.t1].t2);
