@@ -49,7 +49,6 @@ SpotLight::SpotLight(int i) : Light(i)
 
 void SpotLight::create()
 {
-    glMaterialfv(GL_FRONT, GL_SPECULAR, (std::vector<float>{0, 1, 1, 1}).data());
     glLightfv(glLight, GL_POSITION, position.data());
     glLightfv(glLight, GL_SPOT_DIRECTION, direction.data());
     glLightfv(glLight, GL_SPOT_EXPONENT, &exponent);

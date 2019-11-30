@@ -33,7 +33,8 @@ Help help;
 
 //lights
 Lights lights;
-SpotLight submarine_beacon(3);
+Light sun(3);
+SpotLight submarine_beacon(4);
 
 const double pi = M_PI;
 
