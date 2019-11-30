@@ -7,6 +7,18 @@
 
 #include "Matrix.h"
 
+struct Material
+{
+    GLfloat shi;
+    GLfloat amb[4];
+    GLfloat dif[4];
+    GLfloat spe[4];
+    GLfloat ems[4];
+    GLfloat opt;
+    GLfloat alp;
+    GLint ilu;
+};
+
 struct Vertex
 {
     GLfloat x;
@@ -31,6 +43,7 @@ struct Face
     int n1;
     int n2;
     int n3;
+    int m;
     
     void reindex();
 };
@@ -42,6 +55,10 @@ private:
     std::vector<Texture> textures;
     std::vector<Vertex> normals;
     std::vector<Face> faces;
+    std::vector<Material> materials;
+    std::map<std::string, int> map_mat;
+    
+    int mat;
 
     virtual void beforeDraw();
     virtual void afterDraw();

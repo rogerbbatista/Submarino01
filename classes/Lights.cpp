@@ -8,6 +8,16 @@
 
 void Lights::create(){
 
+    bool on = true;
+    bool smoth = true;
+    bool light0 = true;
+    bool light1 = true;
+
+    bool last_on = false;
+    bool last_smooth = false;
+    bool last_light0 = false;
+    bool last_light1 = false;
+
     // Quantidade refletida para cada tipo de reflexão
     GLfloat mat_ambient[] = { 0.0, 0.0, 1.0, 1.0 };
     GLfloat mat_diffuse[] = { 1.0, 0.0, 0.0, 1.0 };
@@ -24,6 +34,8 @@ void Lights::create(){
     GLfloat red_light[] = { 1.0, 0, 0, 0.0 };
  
     glClearColor (1.0, 1.0, 1.0, 1.0);
+
+    glShadeModel(GL_SMOOTH);
    
     glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
@@ -50,7 +62,13 @@ void Lights::create(){
 }
 
 void Lights::change(bool smooth){
-    if (smooth){
+    if(last_smooth != smooth)
+    {
+        this->smooth = !(this->smooth ^ smooth);
+    }
+    last_smooth = smooth;
+
+    if (this->smooth){
         glShadeModel(GL_SMOOTH);
     }else{
         glShadeModel(GL_FLAT);
@@ -58,7 +76,13 @@ void Lights::change(bool smooth){
 }
 
 void Lights::enable(bool on){
-    if (on){
+    if(last_on != on)
+    {
+        this->on = !(this->on ^ on);
+    }
+    last_on = on;
+
+    if (this->on){
         glEnable(GL_LIGHTING);
     }else{
         glDisable(GL_LIGHTING);
@@ -66,17 +90,29 @@ void Lights::enable(bool on){
 }
 
 void Lights::turn(bool on, int light){
-    if (on){
-        if (light == 0){
+    if (light == 0){
+        if(last_light0 != on)
+        {
+            this->light0 = !(this->light0 ^ on);
+        }
+        last_light0 = on;
+
+        if (this->light0){
             glEnable(GL_LIGHT0);
-        }else if (light == 1){
-            glEnable(GL_LIGHT1);
+        }else{
+            glDisable(GL_LIGHT0);   
         }
     }else{
-        if (light == 0){
-            glDisable(GL_LIGHT0);
-        }else if (light == 1){
-            glDisable(GL_LIGHT1);
+        if(last_light1 != on)
+        {
+            this->light1 = !(this->light1 ^ on);
+        }
+        last_light1 = on;
+
+        if (this->light1){
+            glEnable(GL_LIGHT1);
+        }else{
+            glDisable(GL_LIGHT1);   
         }
     }
 }

@@ -7,7 +7,14 @@
 class Lights{
     private:
         bool on;
-        bool smoth;
+        bool smooth;
+        bool light0;
+        bool light1;
+        
+        bool last_on;
+        bool last_smooth;
+        bool last_light0;
+        bool last_light1;
         
     public:
         void create();

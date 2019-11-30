@@ -35,9 +35,10 @@ void mainLoop(int key)
         cam.change_view(true);
 
     help.change(keyboard.h);
+    lights.enable(keyboard.l);
+    lights.change(keyboard.g);
     lights.turn(keyboard.o, 0);
     lights.turn(keyboard.p, 1);
-    lights.change(keyboard.g);
 
     sub.sendControlSignal(u, alpha_dot, beta_dot, psi_dot, flutuation_dot);
 

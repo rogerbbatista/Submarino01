@@ -49,7 +49,6 @@ void Help::draw()
         double padding = scaleFactor * min(width, height) / 100;
         
         double h = text_height;
-        // int w = width - width/3 + width/100;
         double w = padding;
         double tam = scaleFactor * 0.2;
 
