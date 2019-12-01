@@ -82,6 +82,7 @@ protected:
     void updateValues();
 
 public:
+    bool own_color;
     Object();
     Object(std::string name);
     void draw();

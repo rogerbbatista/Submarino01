@@ -73,7 +73,7 @@ void Object::draw()
 
     beforeDraw();
 
-    glColor4f(color_red, color_green, color_blue, 0.9);
+    if (!own_color) glColor4f(color_red, color_green, color_blue, 0.9);
 
     GLfloat black[4] = {0,0,0,1};
     glBegin(GL_TRIANGLES);

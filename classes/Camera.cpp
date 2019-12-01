@@ -24,11 +24,11 @@ void Camera::create()
     direction[2] = look[1] - view[2];
     direction[3] = 1;
 
-    camera_light.setPosition({view[0], view[1], view[2], 1});
-    camera_light.setDirection(direction);
-    camera_light.setColor({1, 1, 0, 1});
-    camera_light.setAngle(30);
-    camera_light.create();
+    // camera_light.setPosition({view[0], view[1], view[2], 1});
+    // camera_light.setDirection(direction);
+    // camera_light.setColor({1, 1, 0, 1});
+    // camera_light.setAngle(30);
+    // camera_light.create();
 }
 
 void Camera::update(Submarine &sub)
@@ -74,9 +74,9 @@ void Camera::update(Submarine &sub)
     direction[2] = look[1] - view[2];
     direction[3] = 1;
 
-    camera_light.setPosition({view[0], view[1], view[2], 1});
-    camera_light.setDirection(direction);
-    camera_light.create();
+    // camera_light.setPosition({view[0], view[1], view[2], 1});
+    // camera_light.setDirection(direction);
+    // camera_light.create();
 }
 
 void Camera::change_view(bool ins)
