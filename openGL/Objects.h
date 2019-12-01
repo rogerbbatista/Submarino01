@@ -16,6 +16,7 @@ extern Object horse[3];
 extern Object old_ship[2];
 extern Object rocks[2];
 extern Object shark[3];
+extern Object ball;
 
 extern Ocean ocean;
 extern Camera cam;

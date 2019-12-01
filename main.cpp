@@ -26,6 +26,7 @@ Object horse[3];
 Object old_ship[2];
 Object rocks[2];
 Object shark[3];
+Object ball;
 
 Ocean ocean;
 Camera cam;

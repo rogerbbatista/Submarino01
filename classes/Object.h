@@ -63,7 +63,7 @@ private:
     virtual void beforeDraw();
     virtual void afterDraw();
     
-    double color_red, color_green, color_blue;
+    double color_red, color_green, color_blue, alp;
 
 protected:
     Matrix rotationMatrix;
@@ -82,14 +82,13 @@ protected:
     void updateValues();
 
 public:
-    bool own_color;
     Object();
     Object(std::string name);
     void draw();
     void charge(std::string name);
     void setPosition(GLfloat x, GLfloat y, GLfloat z);
     void updateRotation(double d_alpha, double d_beta, double d_psi);
-    void setColor(double red, double green, double blue);
+    void setColor(double red, double green, double blue, double a);
     const Matrix dotRotation(const Matrix &other) const;
     void setStructure(double weight, double height, double depth);
 

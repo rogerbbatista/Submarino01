@@ -23,7 +23,8 @@ void display(void)
         r.draw();
     for (auto &s : shark)
         s.draw();
-
+    ball.draw();
+    
     sub.draw();
 
     ocean.draw();

@@ -73,7 +73,7 @@ void Object::draw()
 
     beforeDraw();
 
-    if (!own_color) glColor4f(color_red, color_green, color_blue, 0.9);
+    glColor4f(color_red, color_green, color_blue, alp);
 
     GLfloat black[4] = {0,0,0,1};
     glBegin(GL_TRIANGLES);
@@ -352,11 +352,12 @@ const Matrix Object::dotRotation(const Matrix &other) const
     return rotationMatrix.dot(other);
 }
 
-void Object::setColor(double red, double green, double blue)
+void Object::setColor(double red, double green, double blue, double a)
 {
     color_red = red;
     color_green = green;
     color_blue = blue;
+    alp = a;
 }
 
 void Object::setStructure(double weight, double height, double depth)

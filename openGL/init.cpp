@@ -28,7 +28,7 @@ void init(void)
     glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 400.0);
 
     sub.charge("submarine");
-    sub.setColor(0, 1, 0);
+    sub.setColor(0, 1, 0, 0.9);
     sub.setStructure(5, 5, 8);
     sub.setLimits(-150, 150, -200, 20, -150, 150);
     sub.setAngleLimits(-pi / 6, pi / 6, -pi, pi, -pi / 6, pi / 6);
@@ -36,7 +36,7 @@ void init(void)
     for (auto &a : astronaut)
     {
         a.charge("astronauta");
-        a.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom());
+        a.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom(), 0.9);
     }
     astronaut[0].setPosition(0, -35, -85);
     astronaut[1].setPosition(-55, -25, -55);
@@ -47,7 +47,7 @@ void init(void)
     for (auto &c : coral)
     {
         c.charge("coral");
-        c.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom());
+        c.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom(), 0.9);
     }
     coral[0].setPosition(-85, -20, -85);
     coral[1].setPosition(85, -20, -25);
@@ -58,7 +58,7 @@ void init(void)
     for (auto &h : horse)
     {
         h.charge("horse");
-        h.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom());
+        h.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom(), 0.9);
     }
     horse[0].setPosition(-5, -20, -25);
     horse[1].setPosition(-45, -15, 35);
@@ -67,7 +67,7 @@ void init(void)
     for (auto &o : old_ship)
     {
         o.charge("old_ship");
-        o.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom());
+        o.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom(), 0.9);
     }
     old_ship[0].setPosition(10, 0, -10);
     old_ship[1].setPosition(0, 0, 90);
@@ -75,7 +75,7 @@ void init(void)
     for (auto &r : rocks)
     {
         r.charge("rocks");
-        r.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom());
+        r.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom(), 0.9);
     }
     rocks[0].setPosition(-45, -20, -85);
     rocks[1].setPosition(85, -20, 55);
@@ -83,11 +83,15 @@ void init(void)
     for (auto &s : shark)
     {
         s.charge("shark");
-        s.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom());
+        s.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom(), 0.9);
     }
     shark[0].setPosition(-90, -50, 85);
     shark[1].setPosition(35, -70, -65);
     shark[2].setPosition(25, -30, 25);
+
+    ball.charge("bola");
+    ball.setColor(GConf::getRandom(), GConf::getRandom(), GConf::getRandom(), 0.9);
+    ball.setPosition(0, 0, -10);
 
     ocean.create(200);
     cam.create();

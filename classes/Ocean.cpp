@@ -13,7 +13,6 @@ Ocean::Ocean()
 
 void Ocean::draw()
 {
-    glColor4f(color_water[0], color_water[1], color_water[2], 0.8);
     draw_water();
     glColor4f(color_water[0], color_water[1], color_water[2], color_water[3]);
     draw_face(4, 7, 3, 0);
@@ -63,12 +62,12 @@ void Ocean::create(double tamanho)
         {tam, -tam, -tam},
         {-tam, -tam, -tam}};
 
-    water[0].own_color = true;
-    water[1].own_color = true;
     water[0].charge("ocean");
     water[1].charge("ocean");
     water[0].setPosition(0, -1, 0);
     water[1].setPosition(0, -1, 400);
+    water[0].setColor(color_water[0], color_water[1], color_water[2], 0.8);
+    water[0].setColor(color_water[0], color_water[1], color_water[2], 0.8);
     second = 1;
 }
 
