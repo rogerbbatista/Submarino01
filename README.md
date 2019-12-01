@@ -29,6 +29,8 @@
     - http://paulbourke.net/dataformats/mtl/
     - https://www.tapatalk.com/groups/nendowingsmirai/wavefront-mtl-file-format-info-t1723.html
 
+- Bla bla bla
+    - https://www.khronos.org/opengl/wiki/How_lighting_works#glMaterial_and_glLight
 - Este link foi consultado para a construção do menu de ajuda. O código altera a projeção dentro de pushMatrix e popMatrix para utilizar coordenadas 2D e depois retorna para a configuração normal para desenhar os objetiso 3D.
     - https://stackoverflow.com/questions/5467218/opengl-2d-hud-over-3d
 
