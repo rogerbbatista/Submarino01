@@ -20,8 +20,8 @@ void myinit(void)
 
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
     glLightfv(GL_LIGHT0, GL_AMBIENT, white_light);
-    // glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);
-    // glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -66,10 +66,10 @@ void myReshape(GLsizei w, GLsizei h)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     if (w <= h) 
-        glOrtho (-1.5, 1.5, -1.5*(GLfloat)h/(GLfloat)w, 
+        glFrustum (-1.5, 1.5, -1.5*(GLfloat)h/(GLfloat)w, 
             1.5*(GLfloat)h/(GLfloat)w, -10.0, 10.0);
     else 
-        glOrtho (-1.5*(GLfloat)w/(GLfloat)h, 
+        glFrustum (-1.5*(GLfloat)w/(GLfloat)h, 
             1.5*(GLfloat)w/(GLfloat)h, -1.5, 1.5, -10.0, 10.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();

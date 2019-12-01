@@ -28,10 +28,12 @@ void Help::draw()
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
 
+
+        glDisable(GL_LIGHTING);
+
         glLoadIdentity();
         glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
 
-        // glDisable(GL_LIGHTING);
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -102,7 +104,7 @@ void Help::draw()
         TEXT::texto("Tecla O - Habilita/Desabilita Luz 2.", w, h, tam, -tam);
         h += text_height + text_padding;
 
-        // glEnable(GL_LIGHTING);
+        glEnable(GL_LIGHTING);
 
         glMatrixMode(GL_PROJECTION);
 

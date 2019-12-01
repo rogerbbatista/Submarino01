@@ -4,7 +4,7 @@ void init(void)
 {
     const double pi = GConf::pi;
 
-    glClearColor(1.0, 1.0, 1.0, 1.0); //cor para limpeza do buffer
+    glClearColor(0.51, 0.61, 0.72, 1.0); //cor para limpeza do buffer
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
