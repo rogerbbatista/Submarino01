@@ -29,7 +29,7 @@
     - http://paulbourke.net/dataformats/mtl/
     - https://www.tapatalk.com/groups/nendowingsmirai/wavefront-mtl-file-format-info-t1723.html
 
-- Bla bla bla
+- Em leituras em diversas páginas da internet e principalmente baseado na explicação do comando glMaterial() presente no link abaixo, percebemos que este comando é custoso e não mantém a cor atribuída por glColor(), então, vimos como opção para contornar o glColorMaterial(), este que é mais leve e utiliza a cor do objeto. Além disso, todos os objetos utilizados possuíam as mesmas informações no arquivo .mtl (modelo 3D "cinza" padrão do blender e outros softwares), portanto, não teríamos perdas com a utilização de glColorMaterial(), entretanto, a informação é extraída, armazenada no objeto, e tem sua implementação comentada na função draw() da classe Object.
     - https://www.khronos.org/opengl/wiki/How_lighting_works#glMaterial_and_glLight
 - Este link foi consultado para a construção do menu de ajuda. O código altera a projeção dentro de pushMatrix e popMatrix para utilizar coordenadas 2D e depois retorna para a configuração normal para desenhar os objetiso 3D.
     - https://stackoverflow.com/questions/5467218/opengl-2d-hud-over-3d
