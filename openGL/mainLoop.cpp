@@ -37,8 +37,9 @@ void mainLoop(int key)
     help.change(keyboard.h);
     lights.enable(keyboard.l);
     lights.change(keyboard.g);
-    lights.turn(keyboard.o, 0);
-    lights.turn(keyboard.p, 1);
+    
+    sun.enable(keyboard.o);
+    camera_light.enable(keyboard.p);
 
     sub.sendControlSignal(u, alpha_dot, beta_dot, psi_dot, flutuation_dot);
 

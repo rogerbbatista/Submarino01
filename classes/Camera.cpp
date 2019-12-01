@@ -5,6 +5,7 @@
 #include "Submarine.h"
 #include "Matrix.h"
 #include "Camera.h"
+#include "GConf.h"
 #include "../openGL/Objects.h"
 
 Camera::Camera()
@@ -20,14 +21,21 @@ void Camera::create()
 
     std::vector<float> direction(4);
     direction[0] = look[0] - view[0];
-    direction[1] = look[2] - view[1];
-    direction[2] = look[1] - view[2];
+    direction[1] = look[1] - view[1];
+    direction[2] = look[2] - view[2];
     direction[3] = 1;
+
+    double norm = GConf::norm(direction);
+
+    direction[0] = direction[0] / norm;
+    direction[1] = direction[1] / norm;
+    direction[2] = direction[2] / norm;
 
     camera_light.setPosition({view[0], view[1], view[2], 1});
     camera_light.setDirection(direction);
-    camera_light.setColor({1, 1, 0, 1});
-    camera_light.setAngle(30);
+    camera_light.setColor({1, 1, 1, 1});
+    camera_light.setAngle(45);
+    camera_light.setExponent(0);
     camera_light.create();
 }
 
@@ -45,13 +53,13 @@ void Camera::update(Submarine &sub)
         look = {(GLfloat)sub.getX(),
                 (GLfloat)sub.getY(),
                 (GLfloat)sub.getZ()};
-        
+
         view_up = {0.0, 1.0, 0.0};
     }
     else
     {
         Matrix norm = sub.getNormal();
-        
+
         view = {
             (GLfloat)(sub.getX() + 5 * dir[0][0]),
             (GLfloat)(sub.getY() + 5 * dir[1][0]),
@@ -70,18 +78,33 @@ void Camera::update(Submarine &sub)
 
     std::vector<float> direction(4);
     direction[0] = look[0] - view[0];
-    direction[1] = look[2] - view[1];
-    direction[2] = look[1] - view[2];
+    direction[1] = look[1] - view[1];
+    direction[2] = look[2] - view[2];
     direction[3] = 1;
+
+    double norm = GConf::norm(direction);
+
+    direction[0] = direction[0] / norm;
+    direction[1] = direction[1] / norm;
+    direction[2] = direction[2] / norm;
 
     camera_light.setPosition({view[0], view[1], view[2], 1});
     camera_light.setDirection(direction);
-    camera_light.create();
+    camera_light.update();
 }
 
 void Camera::change_view(bool ins)
 {
     inside = ins;
+
+    if (!inside)
+    {
+        glEnable(camera_light.getLightId());
+    }
+    else
+    {
+        glDisable(camera_light.getLightId());
+    }
 }
 
 const bool Camera::getInside()

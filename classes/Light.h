@@ -14,14 +14,20 @@ protected:
     std::vector<float> position;
     std::vector<float> color;
     int type;
-    bool enable;
+
+    bool last;
+    bool on;
 
 public:
     Light(int i);
     void setPosition(const std::vector<float> &position);
     void setColor(const std::vector<float> &color);
     void setType(int type);
+    int getLightId();
+    void enable(bool on);
+    
     virtual void create();
+    virtual void update();
 };
 
 class SpotLight : public Light
@@ -37,6 +43,6 @@ public:
     void setExponent(float exponent);
     void setAngle(float angleDegree);
     void create();
+    void update();
 };
-
 #endif // LIGHT_H
