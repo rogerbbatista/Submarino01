@@ -19,6 +19,10 @@ void Submarine::KinematicModel()
     double d_psi = psi_dot * dt;
     double d_flutuation = flutuation_dot * dt;
 
+    // centralizar os eixos
+    alpha *= 0.95;
+    psi *= 0.95;
+
     alpha += d_alpha;
     beta += d_beta;
     psi += d_psi;

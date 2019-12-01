@@ -84,4 +84,14 @@ double GConf::getRandom()
     return distribution(g);
 }
 
+double GConf::norm(const std::vector<float> &v)
+{
+    double value = 0;
+    value += v[0] * v[0];
+    value += v[1] * v[1];
+    value += v[2] * v[2];
+
+    return sqrt(value);
+}
+
 #endif //GLOBAL_CONFIG_CPP

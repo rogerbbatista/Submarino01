@@ -99,9 +99,9 @@ void Help::draw()
         h += text_height + text_padding;
         TEXT::texto("Tecla G - Alterna entre shading Flat/Gouraud.", w, h, tam, -tam);
         h += text_height + text_padding;
-        TEXT::texto("Tecla P - Habilita/Desabilita Luz 1.", w, h, tam, -tam);
+        TEXT::texto("Tecla P - Habilita/Desabilita Luz 1 (câmera).", w, h, tam, -tam);
         h += text_height + text_padding;
-        TEXT::texto("Tecla O - Habilita/Desabilita Luz 2.", w, h, tam, -tam);
+        TEXT::texto("Tecla O - Habilita/Desabilita Luz 2 (sol).", w, h, tam, -tam);
         h += text_height + text_padding;
 
         glEnable(GL_LIGHTING);

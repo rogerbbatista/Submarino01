@@ -14,7 +14,26 @@ Light::Light(int i)
 
     position = {0, 0, 0, 1};
     color = {1, 1, 1, 1};
-    enable = true;
+    on = true;
+    last = false;
+}
+
+void Light::enable(bool on)
+{
+    if (last != on)
+    {
+        this->on = !(this->on ^ on);
+    }
+    last = on;
+
+    if (this->on)
+    {
+        glEnable(glLight);
+    }
+    else
+    {
+        glDisable(glLight);
+    }
 }
 
 void Light::setPosition(const std::vector<float> &position)
@@ -27,14 +46,24 @@ void Light::setColor(const std::vector<float> &color)
     this->color = color;
 }
 
-void Light::create()
+void Light::update()
 {
     glLightfv(glLight, GL_POSITION, position.data());
     glLightfv(glLight, GL_AMBIENT, color.data());
     glLightfv(glLight, GL_DIFFUSE, color.data());
     glLightfv(glLight, GL_SPECULAR, color.data());
+}
+
+void Light::create()
+{
+    update();
 
     glEnable(glLight);
+}
+
+int Light::getLightId()
+{
+    return glLight;
 }
 
 SpotLight::SpotLight(int i) : Light(i)
@@ -44,7 +73,7 @@ SpotLight::SpotLight(int i) : Light(i)
     angle = 180;
 }
 
-void SpotLight::create()
+void SpotLight::update()
 {
     glLightfv(glLight, GL_POSITION, position.data());
     glLightfv(glLight, GL_SPOT_DIRECTION, direction.data());
@@ -53,6 +82,12 @@ void SpotLight::create()
     glLightfv(glLight, GL_AMBIENT, color.data());
     glLightfv(glLight, GL_DIFFUSE, color.data());
     glLightfv(glLight, GL_SPECULAR, color.data());
+}
+
+void SpotLight::create()
+{
+    update();
+
     glEnable(glLight);
 }
 

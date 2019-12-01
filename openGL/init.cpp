@@ -8,16 +8,19 @@ void init(void)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    // sun.setPosition({0, 300, 0, 1});
-    // sun.setColor({1, 1, 1, 1});
-    // sun.create();
+    sun.setPosition({0, 300, 0, 1});
+    float sun_intensity = 0.6;
+    sun.setColor({sun_intensity * 1, sun_intensity * 1, sun_intensity * (float)0.5, 1});
+    sun.create();
 
-    // submarine_beacon.setPosition({0, 250, 0, 1});
-    // submarine_beacon.setDirection({0, -1, 0, 1});
-    // submarine_beacon.setColor({1, 1, 0, 1});
-    // submarine_beacon.setAngle(180);
-    // submarine_beacon.setExponent(0);
-    // submarine_beacon.create();
+    Matrix dir = sub.getDirectional();
+    submarine_beacon.setPosition({(GLfloat)(sub.getX() + 5 * dir[0][0]),
+                                  (GLfloat)(sub.getY() + 5 * dir[1][0]),
+                                  (GLfloat)(sub.getZ() + 5 * dir[2][0]), 1});
+    submarine_beacon.setDirection({(float)dir[0][0], (float)dir[1][0], (float)dir[2][0], 1});
+    submarine_beacon.setColor({1, 1, 1, 1});
+    submarine_beacon.setAngle(30);
+    submarine_beacon.create();
 
     glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
@@ -27,7 +30,7 @@ void init(void)
     sub.charge("submarine");
     sub.setColor(0, 1, 0);
     sub.setStructure(5, 5, 8);
-    sub.setLimits(-150, 150, -200, 2, -150, 150);
+    sub.setLimits(-150, 150, -200, 20, -150, 150);
     sub.setAngleLimits(-pi / 6, pi / 6, -pi, pi, -pi / 6, pi / 6);
 
     for (auto &a : astronaut)
@@ -88,6 +91,7 @@ void init(void)
 
     ocean.create(200);
     cam.create();
+    
     lights.create();
 
     help.create();

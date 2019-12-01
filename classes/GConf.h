@@ -17,6 +17,8 @@ Matrix getRotate(double alpha, double beta, double psi);
 double sum(double a, double b);
 double getRandom();
 
+double norm(const std::vector<float> &v);
+
 } // namespace GConf
 
 
