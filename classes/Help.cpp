@@ -31,7 +31,7 @@ void Help::draw()
         glLoadIdentity();
         glOrtho(0.0, width, height, 0.0, -1.0, 10.0);
 
-        glDisable(GL_LIGHTING);
+        // glDisable(GL_LIGHTING);
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -41,6 +41,22 @@ void Help::draw()
         double scaleFactor = 0.5;
 
         glScalef(scaleFactor, scaleFactor, 1);
+
+        int n_linhas = 15;
+
+        glColor3f(0.5, 0.5, 0.5);
+        glBegin(GL_QUADS);
+        {
+            // glVertex2f(width - width/3, height*2/3);
+            // glVertex2f(width , height*2/3);
+            // glVertex2f(width, 0);
+            // glVertex2f(width - width/3, 0);
+            glVertex2f(0, 0.8 * max(width, height) * 2 / 3);
+            glVertex2f(0.9 * max(width, height) * 2 / 3, 0.8 * max(width, height) * 2 / 3);
+            glVertex2f(0.9 * max(width, height) * 2 / 3, 0);
+            glVertex2f(0, 0);
+        }
+        glEnd();
 
         glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -86,21 +102,7 @@ void Help::draw()
         TEXT::texto("Tecla O - Habilita/Desabilita Luz 2.", w, h, tam, -tam);
         h += text_height + text_padding;
 
-        glColor3f(0.5, 0.5, 0.5);
-        glBegin(GL_QUADS);
-        {
-            // glVertex2f(width - width/3, height*2/3);
-            // glVertex2f(width , height*2/3);
-            // glVertex2f(width, 0);
-            // glVertex2f(width - width/3, 0);
-            glVertex2f(0, 0.8 * max(width, height) * 2 / 3);
-            glVertex2f(0.9 * max(width, height) * 2 / 3, 0.8 * max(width, height) * 2 / 3);
-            glVertex2f(0.9 * max(width, height) * 2 / 3, 0);
-            glVertex2f(0, 0);
-        }
-        glEnd();
-
-        glEnable(GL_LIGHTING);
+        // glEnable(GL_LIGHTING);
 
         glMatrixMode(GL_PROJECTION);
 
