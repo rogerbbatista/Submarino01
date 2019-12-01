@@ -18,14 +18,6 @@ void Lights::create(){
     bool last_light0 = false;
     bool last_light1 = false;
 
-    // Quantidade refletida para cada tipo de reflexão
-    GLfloat mat_ambient[] = { 0.0, 0.0, 1.0, 1.0 };
-    GLfloat mat_diffuse[] = { 1.0, 0.0, 0.0, 1.0 };
-    GLfloat mat_specular[] = { 0.0, 1.0, 1.0, 1.0 };
-
-    // Intensificação da luz refletida
-    GLfloat mat_shininess[] = { 1.0, 1.0, 1.0, 1.0 };
-
     // Posição
     GLfloat light_position[ ] = { 1.0, 1.0, 1.0, 0.0 };
 
@@ -37,10 +29,10 @@ void Lights::create(){
 
     glShadeModel(GL_SMOOTH);
    
-    glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+    glEnable(GL_COLOR_MATERIAL) ;
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_SPECULAR);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_EMISSION);
 
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
     glLightfv(GL_LIGHT0, GL_AMBIENT, blue_light);
