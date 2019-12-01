@@ -22,7 +22,9 @@ extern Camera cam;
 extern Lights lights;
 extern Help help;
 
-extern SpotLight submarine_beacon;
+extern Lights lights;
 extern Light sun;
+extern SpotLight submarine_beacon;
+extern SpotLight camera_light;
 
 #endif // OPENGL_OBJ_H
