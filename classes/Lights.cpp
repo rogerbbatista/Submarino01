@@ -3,36 +3,36 @@
 
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include <bits/stdc++.h>
 
 #include "Lights.h"
 
 void Lights::create(){
 
-    bool on = true;
-    bool smoth = true;
-    bool light0 = true;
-    bool light1 = true;
+    on = true;
+    smooth = true;
+    light0 = true;
+    light1 = true;
 
-    bool last_on = false;
-    bool last_smooth = false;
-    bool last_light0 = false;
-    bool last_light1 = false;
+    last_on = false;
+    last_smooth = false;
+    last_light0 = false;
+    last_light1 = false;
 
     // Posição
     GLfloat light_position[ ] = { 1.0, 1.0, 1.0, 0.0 };
 
     // Quantidade de cor enviada
-    GLfloat blue_light[] = { 0, 0, 1.0, 0.0 };
-    GLfloat red_light[] = { 1.0, 0, 0, 0.0 };
- 
-    glClearColor (1.0, 1.0, 1.0, 1.0);
+    GLfloat blue_light[] = { 0, 0.0, 1.0, 0.0 };
+    GLfloat red_light[] = { 1.0, 0.0, 0, 0.0 };
 
     glShadeModel(GL_SMOOTH);
    
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+    glColorMaterial(GL_FRONT, GL_SPECULAR);
+    glColorMaterial(GL_FRONT, GL_EMISSION);
+    glColorMaterial(GL_FRONT, GL_SHININESS);
     glEnable(GL_COLOR_MATERIAL) ;
-    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-    glColorMaterial(GL_FRONT_AND_BACK, GL_SPECULAR);
-    glColorMaterial(GL_FRONT_AND_BACK, GL_EMISSION);
 
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
     glLightfv(GL_LIGHT0, GL_AMBIENT, blue_light);

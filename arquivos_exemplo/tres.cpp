@@ -1,5 +1,5 @@
 #include <GL/glut.h>
-
+#include <bits/stdc++.h>
 void myinit(void)
 {
     GLfloat mat_ambient[ ] = { 1.0, 1.0, 1.0, 1.0 };
@@ -53,6 +53,7 @@ void keyboard (unsigned char key, int x, int y){
 
 void display(void)
 {
+    printf("%d\n", GL_SHADE_MODEL);
     glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT);
     glColor3f (0.5, 0.5, 0.5);
     glutSolidSphere(1.0, 50, 16);

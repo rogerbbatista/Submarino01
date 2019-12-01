@@ -18,8 +18,8 @@ struct Keyboard
 
     Keyboard()
     {
-        g = l = true;
-        p = o = true;
+        g = l = false;
+        p = o = false;
         w = s = a = d = f = i = h = false;
         up = down = left = right = false;
         np_up = np_down = np_left = np_right = false;
