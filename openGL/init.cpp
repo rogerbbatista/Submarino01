@@ -8,16 +8,6 @@ void init(void)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    vector<float> mat_ambient = {0.0, 0.0, 1.0, 1.0};
-    vector<float> mat_diffuse = {1.0, 0.0, 0.0, 1.0};
-    vector<float> mat_specular = {0.0, 1.0, 1.0, 1.0};
-    vector<float> mat_shininess = {1.0, 1.0, 1.0, 1.0};
-
-    glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient.data());
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse.data());
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular.data());
-    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess.data());
-
     // submarine_beacon.setPosition({0, 250, 0, 1});
     // submarine_beacon.setDirection({0, -1, 0, 1});
     // submarine_beacon.setType(GL_SPECULAR);
@@ -26,13 +16,7 @@ void init(void)
     // submarine_beacon.setExponent(64);
     // submarine_beacon.create();
 
-    sun.setPosition({0, 300, 0, 1});
-    sun.setColor({1, 1, 1, 1});
-    sun.create();
-
-    glEnable(GL_LIGHTING);
-    glDepthFunc(GL_LEQUAL);
-    glEnable(GL_DEPTH_TEST);
+    
 
     glFrustum(-1.0, 1.0, -1.0, 1.0, 1.0, 400.0);
 
@@ -100,11 +84,17 @@ void init(void)
 
     ocean.create(200);
     cam.create();
-    // lights.create();
-
-    
 
     help.create();
+
+    glEnable(GL_LIGHTING);
+    
+    sun.setPosition({0, 300, 0, 1});
+    sun.setColor({1, 1, 1, 1});
+    sun.create();
+    
+    glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
 
     glMatrixMode(GL_MODELVIEW);
 }
