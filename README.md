@@ -15,6 +15,7 @@
     - https://free3d.com/3d-model/box-car-v1--508154.html
     - https://free3d.com/3d-model/-horse-v01--801409.html
     - https://free3d.com/3d-model/rocks--43124.html
+    - https://free3d.com/3d-model/island-72811.html
 
 - Documentação
     - https://www.khronos.org
@@ -41,3 +42,5 @@
 - Foi adicionada uma "inércia" em todos os movimentos, conforme uma tecla se mantêm pressionada a velocidade que ele modifica vai convergindo ao valor esperado, ao soltar ela vai decaindo ate chegar a zero, isto da a sensação de inércia do submarino.
 - A câmera acompanha o submarino de forma fixa na visão externa, porem na visão interna, ela fica "presa" ao submarino, sendo influenciada pelas rotações aplicadas a ele, isto da a sensação de estar dentro do submarino.
 - O arquivo map.txt descreve a localização de cada objeto no oceano.
+- O modelo do mar foi feito removendo os objetos que não eram a água do modelo "Island" da referência. Além disso, para a ideia constante de correnteza, foram criados dois objetos com essa textura de água obtida, uma centralizada com o mar e a outra centralizada em X e Y, porém deslocada em 400 (tamanho do mar) em Z. Em seguida, a cada iteração do mainloop a posição Z de ambos os objetos é decrementada em 1, e assim que o que está mais "frente" chega com seu Z em 0, o segundo é deslocado para frente (Z = 400) e assim sucessivamente.
+- Algumas dúvidas sobre o funcionamento do ShadeModel e glMaterial foram tiradas com o Monitor.

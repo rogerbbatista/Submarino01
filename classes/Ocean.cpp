@@ -67,8 +67,8 @@ void Ocean::create(double tamanho)
     water[1].own_color = true;
     water[0].charge("ocean");
     water[1].charge("ocean");
-    water[0].setPosition(0, -1, 400);
-    water[1].setPosition(0, -1, 0);
+    water[0].setPosition(0, -1, 0);
+    water[1].setPosition(0, -1, 400);
     second = 1;
 }
 
