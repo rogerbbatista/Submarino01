@@ -24,5 +24,6 @@ extern Help help;
 
 extern SpotLight submarine_beacon;
 extern Light sun;
+extern SpotLight camera_light;
 
 #endif // OPENGL_OBJ_H

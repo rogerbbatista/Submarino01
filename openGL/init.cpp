@@ -8,17 +8,16 @@ void init(void)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
+    // sun.setPosition({0, 300, 0, 1});
+    // sun.setColor({1, 1, 1, 1});
+    // sun.create();
+
     // submarine_beacon.setPosition({0, 250, 0, 1});
     // submarine_beacon.setDirection({0, -1, 0, 1});
-    // submarine_beacon.setType(GL_SPECULAR);
     // submarine_beacon.setColor({1, 1, 0, 1});
-    // submarine_beacon.setAngle(15);
-    // submarine_beacon.setExponent(64);
+    // submarine_beacon.setAngle(180);
+    // submarine_beacon.setExponent(0);
     // submarine_beacon.create();
-
-    sun.setPosition({0, 300, 0, 1});
-    sun.setColor({1, 1, 1, 1});
-    sun.create();
 
     glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);

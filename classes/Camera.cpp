@@ -4,8 +4,8 @@
 #include <GL/gl.h>
 #include "Submarine.h"
 #include "Matrix.h"
-
 #include "Camera.h"
+#include "../openGL/Objects.h"
 
 Camera::Camera()
 {
@@ -17,6 +17,18 @@ void Camera::create()
     look = {0.0, 0.0, 0.0};
     view_up = {0.0, 1.0, 0.0};
     inside = false;
+
+    std::vector<float> direction(4);
+    direction[0] = look[0] - view[0];
+    direction[1] = look[2] - view[1];
+    direction[2] = look[1] - view[2];
+    direction[3] = 1;
+
+    camera_light.setPosition({view[0], view[1], view[2], 1});
+    camera_light.setDirection(direction);
+    camera_light.setColor({1, 1, 0, 1});
+    camera_light.setAngle(30);
+    camera_light.create();
 }
 
 void Camera::update(Submarine &sub)
@@ -55,6 +67,16 @@ void Camera::update(Submarine &sub)
             (GLfloat)norm[1][0],
             (GLfloat)norm[2][0]};
     }
+
+    std::vector<float> direction(4);
+    direction[0] = look[0] - view[0];
+    direction[1] = look[2] - view[1];
+    direction[2] = look[1] - view[2];
+    direction[3] = 1;
+
+    camera_light.setPosition({view[0], view[1], view[2], 1});
+    camera_light.setDirection(direction);
+    camera_light.create();
 }
 
 void Camera::change_view(bool ins)

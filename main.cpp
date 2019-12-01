@@ -35,6 +35,7 @@ Help help;
 Lights lights;
 Light sun(3);
 SpotLight submarine_beacon(4);
+SpotLight camera_light(5);
 
 const double pi = M_PI;
 
