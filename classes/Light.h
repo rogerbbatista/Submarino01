@@ -13,14 +13,12 @@ protected:
     int glLight;
     std::vector<float> position;
     std::vector<float> color;
-    int type;
     bool enable;
 
 public:
     Light(int i);
     void setPosition(const std::vector<float> &position);
     void setColor(const std::vector<float> &color);
-    void setType(int type);
     virtual void create();
 };
 

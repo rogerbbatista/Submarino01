@@ -12,9 +12,8 @@ Light::Light(int i)
         std::cerr << "Número de luzes excedido" << std::endl;
     }
 
-    position = {0., 0., 0., 1.};
-    color = {1., 1., 1., 1.,};
-    type = GL_AMBIENT;
+    position = {0, 0, 0, 1};
+    color = {1, 1, 1, 1};
     enable = true;
 }
 
@@ -28,15 +27,13 @@ void Light::setColor(const std::vector<float> &color)
     this->color = color;
 }
 
-void Light::setType(int type)
-{
-    this->type = type;
-}
-
 void Light::create()
 {
     glLightfv(glLight, GL_POSITION, position.data());
-    glLightfv(glLight, type, color.data());
+    glLightfv(glLight, GL_AMBIENT, color.data());
+    glLightfv(glLight, GL_DIFFUSE, color.data());
+    glLightfv(glLight, GL_SPECULAR, color.data());
+
     glEnable(glLight);
 }
 
@@ -53,7 +50,9 @@ void SpotLight::create()
     glLightfv(glLight, GL_SPOT_DIRECTION, direction.data());
     glLightfv(glLight, GL_SPOT_EXPONENT, &exponent);
     glLightfv(glLight, GL_SPOT_CUTOFF, &angle);
-    glLightfv(glLight, type, color.data());
+    glLightfv(glLight, GL_AMBIENT, color.data());
+    glLightfv(glLight, GL_DIFFUSE, color.data());
+    glLightfv(glLight, GL_SPECULAR, color.data());
     glEnable(glLight);
 }
 
@@ -71,6 +70,5 @@ void SpotLight::setAngle(float angleDegree)
 {
     this->angle = angleDegree;
 }
-
 
 #endif // LIGHT_CPP
